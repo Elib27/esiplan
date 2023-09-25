@@ -13,7 +13,8 @@ export default function LessonCard({
       <span className='block text-center text-white'>{room}</span>
       <span className='block text-center text-white'>{type}</span>
       <span className='block text-center text-white'>
-        from {startTime} to {endTime}
+        from {new Date(startTime).toLocaleTimeString('fr-FR')} to{' '}
+        {new Date(endTime).toLocaleTimeString('fr-FR')}
       </span>
     </div>
   )
