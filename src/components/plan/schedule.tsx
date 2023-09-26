@@ -1,18 +1,8 @@
 'use client'
 import { useState } from 'react'
 import LessonCard from '@/components/plan/lessonCard'
-
-const sortByDate = (a: Lesson, b: Lesson) => {
-  if (new Date(a.startTime).getTime() >= new Date(b.startTime).getTime())
-    return 1
-  return -1
-}
-
-const addDays = (date: Date, days: number) => {
-  const newDate = new Date(date)
-  newDate.setDate(newDate.getDate() + days)
-  return newDate
-}
+import sortLessonsByDate from '@/lib/sortLessonsByDate'
+import addDaysToDate from '@/lib/addDaysToDate'
 
 export default function Schedule({ lessons }: { lessons: Lesson[] }) {
   const [scheduleDate, setScheduleDate] = useState(new Date())
@@ -30,7 +20,7 @@ export default function Schedule({ lessons }: { lessons: Lesson[] }) {
         new Date(lesson.startTime).toLocaleDateString('fr-FR') ===
         scheduleDate.toLocaleDateString('fr-FR')
     )
-    ?.sort(sortByDate)
+    ?.sort(sortLessonsByDate)
 
   if (!todayLessons) return null
 
@@ -38,7 +28,7 @@ export default function Schedule({ lessons }: { lessons: Lesson[] }) {
     <div className='flex w-full justify-center gap-4'>
       <button
         className='h-fit self-end rounded-full bg-violet-300 p-4'
-        onClick={() => setScheduleDate(addDays(scheduleDate, -1))}
+        onClick={() => setScheduleDate(addDaysToDate(scheduleDate, -1))}
       >
         -1
       </button>
@@ -57,7 +47,7 @@ export default function Schedule({ lessons }: { lessons: Lesson[] }) {
       </div>
       <button
         className='h-fit self-end rounded-full bg-violet-300 p-4'
-        onClick={() => setScheduleDate(addDays(scheduleDate, 1))}
+        onClick={() => setScheduleDate(addDaysToDate(scheduleDate, 1))}
       >
         +1
       </button>
