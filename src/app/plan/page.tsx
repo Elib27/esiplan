@@ -12,9 +12,9 @@ export default async function SchedulePage() {
   const lessons = await getPlanning()
 
   return (
-    <>
+    <main className='flex h-screen flex-col'>
       <h1 className='py-8 text-center text-4xl font-bold'>Emploi du temps</h1>
       <Schedule lessons={lessons} />
-    </>
+    </main>
   )
 }

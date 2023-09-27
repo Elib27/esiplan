@@ -1,8 +1,8 @@
 'use client'
 import { useState } from 'react'
-import LessonCard from '@/components/plan/lessonCard'
+import LessonCard from './lessonCard'
+import DateNavigation from './dateNavigation'
 import sortLessonsByDate from '@/lib/sortLessonsByDate'
-import addDaysToDate from '@/lib/addDaysToDate'
 
 export default function Schedule({ lessons }: { lessons: Lesson[] }) {
   const [scheduleDate, setScheduleDate] = useState(new Date())
@@ -25,13 +25,7 @@ export default function Schedule({ lessons }: { lessons: Lesson[] }) {
   if (!todayLessons) return null
 
   return (
-    <div className='flex w-full justify-center gap-4'>
-      <button
-        className='bg-light-purple h-fit self-end rounded-full p-4'
-        onClick={() => setScheduleDate(addDaysToDate(scheduleDate, -1))}
-      >
-        -1
-      </button>
+    <div className='flex h-full w-full flex-col items-center justify-between gap-4'>
       <div className='flex w-[90vw] max-w-sm flex-col items-center gap-4'>
         <h3>{fullScheduleDate}</h3>
         {todayLessons.map((lesson: Lesson) => (
@@ -45,12 +39,10 @@ export default function Schedule({ lessons }: { lessons: Lesson[] }) {
           />
         ))}
       </div>
-      <button
-        className='bg-light-purple h-fit self-end rounded-full p-4'
-        onClick={() => setScheduleDate(addDaysToDate(scheduleDate, 1))}
-      >
-        +1
-      </button>
+      <DateNavigation
+        setScheduleDate={setScheduleDate}
+        scheduleDate={scheduleDate}
+      />
     </div>
   )
 }
