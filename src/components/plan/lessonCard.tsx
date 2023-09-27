@@ -23,24 +23,47 @@ export default function LessonCard({
 }: LessonCardProps) {
   const lessonDuration = getLessonDuration(startTime, endTime)
 
+  const formatedStartTime = new Date(startTime).toLocaleTimeString('fr-FR', {
+    timeStyle: 'short',
+  })
+  const formatedEndTime = new Date(endTime).toLocaleTimeString('fr-FR', {
+    timeStyle: 'short',
+  })
+
+  const lessonTypeBgColors: { readonly [index: string]: string } = {
+    cm: 'bg-color-cm',
+    td: 'bg-color-td',
+    tp: 'bg-color-tp',
+    ds: 'bg-color-ds',
+    ex: 'bg-color-ex',
+    au: 'bg-color-au',
+  }
+
   return (
     <div
-      className={
-        `h-${getCardSizeWithDuration(lessonDuration)}` +
-        ' rounded-xl bg-purple-900 p-4'
-      }
+      className={`h-${getCardSizeWithDuration(
+        lessonDuration
+      )} bg-main-purple flex w-full items-center gap-2 overflow-hidden rounded-2xl`}
     >
-      <h2 className='text-center font-bold text-white'>{subject}</h2>
-      <span className='block text-center text-white'>{room}</span>
-      <span className='block text-center text-white'>{type}</span>
-      <span className='block text-center text-white'>
-        from {new Date(startTime).toLocaleTimeString('fr-FR')} to{' '}
-        {new Date(endTime).toLocaleTimeString('fr-FR')}
-      </span>
-      <span className='block text-center text-white'>
-        Duration:{' '}
-        {Math.round(100 * getLessonDuration(startTime, endTime)) / 100}
-      </span>
+      <div className='flex h-full flex-col justify-between py-4 pl-4'>
+        <span className='text-sm text-white'>{formatedStartTime}</span>
+        <span className='text-sm text-white'>{formatedEndTime}</span>
+      </div>
+      <div className='flex-1 py-8'>
+        <h2 className='text-ellipsis text-center font-bold text-white'>
+          {subject}
+        </h2>
+        <span className='block text-ellipsis text-center text-white'>
+          {room}
+        </span>
+      </div>
+      <div
+        className={`${
+          lessonTypeBgColors[type.toLocaleLowerCase()]
+        } flex h-full items-center justify-center`}
+      >
+        <span className='px-4 font-bold'>{type.toUpperCase()}</span>
+      </div>
     </div>
   )
 }

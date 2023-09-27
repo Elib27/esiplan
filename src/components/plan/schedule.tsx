@@ -10,7 +10,7 @@ export default function Schedule({ lessons }: { lessons: Lesson[] }) {
   const fullScheduleDate = scheduleDate.toLocaleDateString('fr-FR', {
     weekday: 'long',
     year: 'numeric',
-    month: 'long',
+    month: 'short',
     day: 'numeric',
   })
 
@@ -27,12 +27,12 @@ export default function Schedule({ lessons }: { lessons: Lesson[] }) {
   return (
     <div className='flex w-full justify-center gap-4'>
       <button
-        className='h-fit self-end rounded-full bg-violet-300 p-4'
+        className='bg-light-purple h-fit self-end rounded-full p-4'
         onClick={() => setScheduleDate(addDaysToDate(scheduleDate, -1))}
       >
         -1
       </button>
-      <div className='flex flex-col items-center gap-4'>
+      <div className='flex w-[90vw] max-w-sm flex-col items-center gap-4'>
         <h3>{fullScheduleDate}</h3>
         {todayLessons.map((lesson: Lesson) => (
           <LessonCard
@@ -46,7 +46,7 @@ export default function Schedule({ lessons }: { lessons: Lesson[] }) {
         ))}
       </div>
       <button
-        className='h-fit self-end rounded-full bg-violet-300 p-4'
+        className='bg-light-purple h-fit self-end rounded-full p-4'
         onClick={() => setScheduleDate(addDaysToDate(scheduleDate, 1))}
       >
         +1
