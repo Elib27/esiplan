@@ -28,7 +28,10 @@ export default function Schedule({ lessons }: { lessons: Lesson[] }) {
   return (
     <div className='flex h-full min-h-0 w-full flex-col items-center justify-between gap-4'>
       <div className='flex min-h-0 w-full flex-col items-center'>
-        <TopMenu />
+        <TopMenu
+          scheduleDate={scheduleDate}
+          setScheduleDate={setScheduleDate}
+        />
         <h3 className='py-4 text-center'>{fullScheduleDate}</h3>
         <div className='flex min-h-0 w-[90vw] max-w-sm flex-col items-center gap-4 overflow-y-auto px-2 pb-4'>
           {todayLessons.map((lesson: Lesson) => (
@@ -45,7 +48,7 @@ export default function Schedule({ lessons }: { lessons: Lesson[] }) {
       </div>
       <DateNavigation
         setScheduleDate={setScheduleDate}
-        scheduleDate={scheduleDate}
+        scheduleDate={scheduleDate as Date}
       />
     </div>
   )
