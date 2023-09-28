@@ -4,15 +4,22 @@ function getLessonDuration(startTime: string, endTime: string): number {
   const start = new Date(startTime)
   const end = new Date(endTime)
   const duration = end.getTime() - start.getTime()
-  const MS_IN_LESSON_HOUR = 60 * 60 * 1000 * 1.5 // Lesson duration: 1:30
-  const hours = duration / MS_IN_LESSON_HOUR
+  const MS_PER_TIME_BLOCK = 60 * 60 * 1000 * 1.5 // Lesson duration: 1:30
+  const hours = duration / MS_PER_TIME_BLOCK
   return hours
 }
 
-function getCardSizeWithDuration(durationInHours: number): number {
-  const HEIGHT_PER_LESSON_HOUR = 36
-  return durationInHours * HEIGHT_PER_LESSON_HOUR
+function getCardHeightWithDuration(durationInTimeBlocks: number): number {
+  if (durationInTimeBlocks < 1) return 1
+  if (durationInTimeBlocks > 1 && durationInTimeBlocks < 2) return 1.5
+  if (durationInTimeBlocks > 2) return 2
+  return durationInTimeBlocks
 }
+
+const formatTime = (time: string) =>
+  new Date(time).toLocaleTimeString('fr-FR', {
+    timeStyle: 'short',
+  })
 
 export default function LessonCard({
   subject,
@@ -21,15 +28,6 @@ export default function LessonCard({
   startTime,
   endTime,
 }: LessonCardProps) {
-  const lessonDuration = getLessonDuration(startTime, endTime)
-
-  const formatedStartTime = new Date(startTime).toLocaleTimeString('fr-FR', {
-    timeStyle: 'short',
-  })
-  const formatedEndTime = new Date(endTime).toLocaleTimeString('fr-FR', {
-    timeStyle: 'short',
-  })
-
   const lessonTypeBgColors: { readonly [index: string]: string } = {
     cm: 'bg-color-cm',
     td: 'bg-color-td',
@@ -39,21 +37,29 @@ export default function LessonCard({
     au: 'bg-color-au',
   }
 
+  const cardSizes: { readonly [index: number]: string } = {
+    1: 'h-24',
+    1.5: 'h-36',
+    2: 'h-48',
+  }
+
+  const lessonDuration = getLessonDuration(startTime, endTime)
+
   return (
     <div
-      className={`h-${getCardSizeWithDuration(
-        lessonDuration
-      )} bg-main-purple flex w-full items-center gap-2 overflow-hidden rounded-2xl`}
+      className={`${
+        cardSizes[getCardHeightWithDuration(lessonDuration)]
+      } shadow-card flex w-full flex-shrink-0 items-center gap-2 overflow-hidden rounded-2xl bg-main-purple`}
     >
-      <div className='flex h-full flex-col justify-between py-4 pl-4'>
-        <span className='text-sm text-white'>{formatedStartTime}</span>
-        <span className='text-sm text-white'>{formatedEndTime}</span>
+      <div className='flex h-full flex-col justify-between py-3 pl-3'>
+        <span className='text-sm text-white'>{formatTime(startTime)}</span>
+        <span className='text-sm text-white'>{formatTime(endTime)}</span>
       </div>
-      <div className='flex-1 py-8'>
-        <h2 className='text-ellipsis text-center font-bold text-white'>
+      <div className='flex-1 overflow-hidden'>
+        <h2 className='overflow-hidden text-ellipsis text-center font-bold text-white'>
           {subject}
         </h2>
-        <span className='block text-ellipsis text-center text-white'>
+        <span className='block overflow-hidden text-ellipsis text-center text-white'>
           {room}
         </span>
       </div>

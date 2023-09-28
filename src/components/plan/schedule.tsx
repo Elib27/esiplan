@@ -25,19 +25,21 @@ export default function Schedule({ lessons }: { lessons: Lesson[] }) {
   if (!todayLessons) return null
 
   return (
-    <div className='flex h-full w-full flex-col items-center justify-between gap-4'>
-      <div className='flex w-[90vw] max-w-sm flex-col items-center gap-4'>
-        <h3>{fullScheduleDate}</h3>
-        {todayLessons.map((lesson: Lesson) => (
-          <LessonCard
-            subject={lesson.subject}
-            type={lesson.type}
-            room={lesson.room}
-            startTime={lesson.startTime}
-            endTime={lesson.endTime}
-            key={lesson.id}
-          />
-        ))}
+    <div className='flex h-full min-h-0 w-full flex-col items-center justify-between gap-4'>
+      <div className='flex min-h-0 flex-col'>
+        <h3 className='py-4 text-center'>{fullScheduleDate}</h3>
+        <div className='flex min-h-0 w-[90vw] max-w-sm flex-col items-center gap-4 overflow-y-auto px-2 pb-4'>
+          {todayLessons.map((lesson: Lesson) => (
+            <LessonCard
+              subject={lesson.subject}
+              type={lesson.type}
+              room={lesson.room}
+              startTime={lesson.startTime}
+              endTime={lesson.endTime}
+              key={lesson.id}
+            />
+          ))}
+        </div>
       </div>
       <DateNavigation
         setScheduleDate={setScheduleDate}

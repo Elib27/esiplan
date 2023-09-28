@@ -18,6 +18,11 @@ const config: Config = {
       'color-ex': '#F07676',
       'color-au': '#E27EF2',
     },
+    extend: {
+      boxShadow: {
+        card: '0px 4px 6px rgba(0, 0, 0, 0.25)',
+      },
+    },
   },
   plugins: [],
 }
