@@ -12,6 +12,7 @@ const config: Config = {
       'main-purple': '#8A47CD',
       'light-purple': '#D0BFE1',
       'dark-gray': '#49454F',
+      'light-gray': '#B7B3BE',
       'color-cm': '#ADB0F4',
       'color-td': '#E9CCA0',
       'color-tp': '#C4E4AA',

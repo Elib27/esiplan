@@ -19,7 +19,7 @@ export default function DateNavigation({
   const handleClickToday = () => setScheduleDate(new Date())
 
   return (
-    <div className='flex items-center gap-10 p-4'>
+    <div className='border-light-gray flex w-full items-center justify-center gap-10 border-t-2 p-4'>
       <button
         className='flex aspect-square h-14 items-center justify-center rounded-full bg-light-purple'
         onClick={handleClickPrevDay}

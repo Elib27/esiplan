@@ -18,7 +18,7 @@ export default function DayLessons({
     )
     ?.sort(sortLessonsByDate)
 
-  if (scheduleDate.getTime() < new Date().getTime()) {
+  if (scheduleDate.getTime() < new Date().setHours(0, 0, 0)) {
     return (
       <div className='flex h-full min-h-0 w-[90vw] max-w-sm items-center justify-center'>
         <PastDay />

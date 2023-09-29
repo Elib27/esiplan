@@ -1,6 +1,6 @@
 'use client'
 import { useState } from 'react'
-import TopMenu from './topMenu'
+import TopMenu from './topMenu/topMenu'
 import DateNavigation from './dateNavigation'
 import DayLessons from './dayLessons'
 
@@ -15,7 +15,7 @@ export default function Schedule({ lessons }: { lessons: Lesson[] }) {
   })
 
   return (
-    <div className='flex h-full min-h-0 w-full flex-col items-center justify-between gap-4'>
+    <div className='flex h-full min-h-0 w-full flex-col items-center justify-between'>
       <div className='flex min-h-0 w-full flex-grow flex-col items-center'>
         <TopMenu
           scheduleDate={scheduleDate}
