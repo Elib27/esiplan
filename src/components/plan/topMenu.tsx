@@ -41,7 +41,6 @@ export default function TopMenu({
       </Link>
       {isDatePickerOpen && (
         <div className='z-99 absolute left-0 top-0 flex h-screen w-full items-center justify-center bg-light-purple/75'>
-          div.
           <DatePicker
             selected={scheduleDate}
             inline

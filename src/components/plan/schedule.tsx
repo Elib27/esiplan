@@ -1,9 +1,8 @@
 'use client'
 import { useState } from 'react'
 import TopMenu from './topMenu'
-import LessonCard from './lessonCard'
 import DateNavigation from './dateNavigation'
-import sortLessonsByDate from '@/lib/sortLessonsByDate'
+import DayLessons from './dayLessons'
 
 export default function Schedule({ lessons }: { lessons: Lesson[] }) {
   const [scheduleDate, setScheduleDate] = useState(new Date())
@@ -15,36 +14,15 @@ export default function Schedule({ lessons }: { lessons: Lesson[] }) {
     day: 'numeric',
   })
 
-  const todayLessons: Lesson[] = lessons
-    ?.filter(
-      (lesson: Lesson) =>
-        new Date(lesson.startTime).toLocaleDateString('fr-FR') ===
-        scheduleDate.toLocaleDateString('fr-FR')
-    )
-    ?.sort(sortLessonsByDate)
-
-  if (!todayLessons) return null
-
   return (
     <div className='flex h-full min-h-0 w-full flex-col items-center justify-between gap-4'>
-      <div className='flex min-h-0 w-full flex-col items-center'>
+      <div className='flex min-h-0 w-full flex-grow flex-col items-center'>
         <TopMenu
           scheduleDate={scheduleDate}
           setScheduleDate={setScheduleDate}
         />
         <h3 className='py-4 text-center'>{fullScheduleDate}</h3>
-        <div className='flex min-h-0 w-[90vw] max-w-sm flex-col items-center gap-4 overflow-y-auto px-2 pb-4'>
-          {todayLessons.map((lesson: Lesson) => (
-            <LessonCard
-              subject={lesson.subject}
-              type={lesson.type}
-              room={lesson.room}
-              startTime={lesson.startTime}
-              endTime={lesson.endTime}
-              key={lesson.id}
-            />
-          ))}
-        </div>
+        <DayLessons lessons={lessons} scheduleDate={scheduleDate} />
       </div>
       <DateNavigation
         setScheduleDate={setScheduleDate}
