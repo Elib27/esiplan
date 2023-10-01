@@ -1,24 +1,27 @@
 'use client'
 import Link from 'next/link'
-import { useState } from 'react'
 import Option from '@/components/plan/settings/option'
 import SelectedEdt from '@/components/plan/settings/selectedEdt'
 import BackIcon from '@/assets/arrow-back.svg'
 import AddIcon from '@/assets/add.svg'
+import useStore from '@/store/store'
 
 export default function SettingsPage() {
-  const [isDarkMode, setIsDarkMode] = useState(false)
-  const [isUpdateAtOpening, setIsUpdateAtOpening] = useState(false)
-  const [isOtherOption, setIsOtherOption] = useState(false)
-  const [selectedEdts, setSelectedEdts] = useState<string[]>([
-    '3A-TP1A',
-    '3A-TP1B',
-  ])
-
-  function deleteEdt(group: string) {
-    const newSelectedEdts = selectedEdts.filter((edt) => edt !== group)
-    setSelectedEdts(newSelectedEdts)
-  }
+  const {
+    isDarkMode,
+    selectedEdts,
+    toggleDarkMode,
+    addSelectedEdt,
+    removeSelectedEdt,
+  } = useStore((state) => {
+    return {
+      isDarkMode: state.darkMode,
+      selectedEdts: state.selectedEdts,
+      toggleDarkMode: state.toggleDarkMode,
+      addSelectedEdt: state.addSelectedEdt,
+      removeSelectedEdt: state.removeSelectedEdt,
+    }
+  })
 
   return (
     <>
@@ -33,17 +36,7 @@ export default function SettingsPage() {
             <Option
               title='Dark Mode'
               isActivated={isDarkMode}
-              onClick={() => setIsDarkMode(!isDarkMode)}
-            />
-            <Option
-              title='Raffraichir à chaque ouverture'
-              isActivated={isUpdateAtOpening}
-              onClick={() => setIsUpdateAtOpening(!isUpdateAtOpening)}
-            />
-            <Option
-              title='Autre option folle'
-              isActivated={isOtherOption}
-              onClick={() => setIsOtherOption(!isOtherOption)}
+              onClick={() => toggleDarkMode()}
             />
           </div>
           <h2 className='pb-4 text-xl font-bold'>EDTs</h2>
@@ -53,7 +46,7 @@ export default function SettingsPage() {
                 key={group}
                 number={i + 1}
                 group={group}
-                deleteEdt={() => deleteEdt(group)}
+                deleteEdt={() => removeSelectedEdt(group)}
               />
             ))}
           </div>
@@ -61,7 +54,7 @@ export default function SettingsPage() {
             <div className='flex justify-center pt-4'>
               <button
                 className='rounded-full bg-light-purple p-2 active:scale-95'
-                onClick={() => setSelectedEdts([...selectedEdts, '1A-TP2'])}
+                onClick={() => addSelectedEdt('1A-TP2')}
               >
                 <AddIcon />
               </button>
