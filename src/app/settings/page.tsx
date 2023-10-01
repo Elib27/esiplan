@@ -1,7 +1,7 @@
 'use client'
 import Link from 'next/link'
-import Option from '@/components/plan/settings/option'
-import SelectedEdt from '@/components/plan/settings/selectedEdt'
+import Option from '@/components/settings/option'
+import SelectedEdt from '@/components/settings/selectedEdt'
 import BackIcon from '@/assets/arrow-back.svg'
 import AddIcon from '@/assets/add.svg'
 import useStore from '@/store/store'
@@ -25,7 +25,7 @@ export default function SettingsPage() {
 
   return (
     <>
-      <Link href='/plan' className='m-4 block w-fit text-dark-gray'>
+      <Link href='/' className='m-4 block w-fit text-dark-gray'>
         <BackIcon />
       </Link>
       <main className='flex flex-col items-center'>

@@ -1,12 +1,19 @@
-import Link from 'next/link'
+import Schedule from '@/components/schedule'
 
-export default function Home() {
+async function getPlanning() {
+  const res = await fetch('http://localhost:3000/api/lessons', {
+    next: { revalidate: 3600 * 6 },
+  })
+  const lessons = await res.json()
+  return lessons
+}
+
+export default async function SchedulePage() {
+  const lessons = await getPlanning()
+
   return (
-    <>
-      <h1 className='text-bold py-8 text-center text-4xl'>ESIPLAN</h1>
-      <Link href='/plan' className='block text-center'>
-        Aller au planning
-      </Link>
-    </>
+    <main className='flex h-screen flex-col overflow-hidden'>
+      <Schedule lessons={lessons} />
+    </main>
   )
 }
