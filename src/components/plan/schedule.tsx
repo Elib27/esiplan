@@ -3,6 +3,7 @@ import { useState } from 'react'
 import TopMenu from './topMenu/topMenu'
 import DateNavigation from './dateNavigation'
 import DayLessons from './dayLessons'
+import EdtNavigation from './edtNavigation'
 
 export default function Schedule({ lessons }: { lessons: Lesson[] }) {
   const [scheduleDate, setScheduleDate] = useState(new Date())
@@ -24,10 +25,13 @@ export default function Schedule({ lessons }: { lessons: Lesson[] }) {
         <h3 className='py-4 text-center'>{fullScheduleDate}</h3>
         <DayLessons lessons={lessons} scheduleDate={scheduleDate} />
       </div>
-      <DateNavigation
-        setScheduleDate={setScheduleDate}
-        scheduleDate={scheduleDate as Date}
-      />
+      <div className='flex w-full flex-col items-center justify-center border-t-2 border-light-gray'>
+        <EdtNavigation />
+        <DateNavigation
+          setScheduleDate={setScheduleDate}
+          scheduleDate={scheduleDate as Date}
+        />
+      </div>
     </div>
   )
 }

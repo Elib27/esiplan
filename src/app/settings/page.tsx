@@ -4,6 +4,7 @@ import { useState } from 'react'
 import Option from '@/components/plan/settings/option'
 import SelectedEdt from '@/components/plan/settings/selectedEdt'
 import BackIcon from '@/assets/arrow-back.svg'
+import AddIcon from '@/assets/add.svg'
 
 export default function SettingsPage() {
   const [isDarkMode, setIsDarkMode] = useState(false)
@@ -12,7 +13,6 @@ export default function SettingsPage() {
   const [selectedEdts, setSelectedEdts] = useState<string[]>([
     '3A-TP1A',
     '3A-TP1B',
-    '2A-TP3',
   ])
 
   function deleteEdt(group: string) {
@@ -57,6 +57,16 @@ export default function SettingsPage() {
               />
             ))}
           </div>
+          {selectedEdts.length < 3 && (
+            <div className='flex justify-center pt-4'>
+              <button
+                className='rounded-full bg-light-purple p-2 active:scale-95'
+                onClick={() => setSelectedEdts([...selectedEdts, '1A-TP2'])}
+              >
+                <AddIcon />
+              </button>
+            </div>
+          )}
         </div>
       </main>
     </>
