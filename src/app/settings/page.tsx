@@ -7,21 +7,19 @@ import AddIcon from '@/assets/add.svg'
 import useStore from '@/store/store'
 
 export default function SettingsPage() {
-  const {
-    isDarkMode,
-    selectedEdts,
-    toggleDarkMode,
-    addSelectedEdt,
-    removeSelectedEdt,
-  } = useStore((state) => {
-    return {
-      isDarkMode: state.darkMode,
-      selectedEdts: state.selectedEdts,
-      toggleDarkMode: state.toggleDarkMode,
-      addSelectedEdt: state.addSelectedEdt,
-      removeSelectedEdt: state.removeSelectedEdt,
+  const { isDarkMode, selectedEdts, toggleDarkMode, addSelectedEdt } = useStore(
+    (state) => {
+      return {
+        isDarkMode: state.darkMode,
+        selectedEdts: state.selectedEdts,
+        toggleDarkMode: state.toggleDarkMode,
+        addSelectedEdt: state.addSelectedEdt,
+      }
     }
-  })
+  )
+
+  const isAddButtonVisible =
+    selectedEdts.length < 3 && !selectedEdts.includes('')
 
   return (
     <>
@@ -42,19 +40,14 @@ export default function SettingsPage() {
           <h2 className='pb-4 text-xl font-bold'>EDTs</h2>
           <div className='max-w flex w-full flex-col gap-4'>
             {selectedEdts.map((group, i) => (
-              <SelectedEdt
-                key={group}
-                number={i + 1}
-                group={group}
-                deleteEdt={() => removeSelectedEdt(group)}
-              />
+              <SelectedEdt key={group} number={i + 1} group={group} />
             ))}
           </div>
-          {selectedEdts.length < 3 && (
+          {isAddButtonVisible && (
             <div className='flex justify-center pt-4'>
               <button
                 className='rounded-full bg-light-purple p-2 active:scale-95'
-                onClick={() => addSelectedEdt('1A-TP2')}
+                onClick={() => addSelectedEdt('')}
               >
                 <AddIcon />
               </button>
