@@ -14,7 +14,7 @@ type Action = {
 
 const useStore = create<State & Action>((set) => ({
   darkMode: false,
-  selectedEdts: ['3A-TP1A', '3A-TP1B'],
+  selectedEdts: ['3A-S1-TP1A', '3A-S1-TP1B'],
   toggleDarkMode: () => set((state) => ({ darkMode: !state.darkMode })),
   addSelectedEdt: (edt) =>
     set((state) => ({ selectedEdts: [...state.selectedEdts, edt] })),

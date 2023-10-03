@@ -11,4 +11,6 @@ declare global {
     endTime: string
     id: string
   }
+
+  type Schedule = Lesson[]
 }

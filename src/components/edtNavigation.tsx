@@ -1,21 +1,25 @@
-import { useState } from 'react'
+import useStore from '@/store/store'
 
-export default function EdtNavigation() {
-  const [selectedEdt, setSelectedEdt] = useState('3A-TP1A')
-
+export default function EdtNavigation({
+  currentEdt,
+  setCurrentEdt,
+}: {
+  currentEdt: string
+  setCurrentEdt: (edt: string) => void
+}) {
   const isSelectedStyle =
     "after:absolute after:left-0 after:top-0 after:h-[2px] after:w-full after:bg-main-purple after:content-['']"
 
-  const EDTs = ['3A-TP1A', '3A-TP2A', '2A-TP1']
+  const selectedEdts = useStore((state) => state.selectedEdts)
 
   return (
     <div className='flex gap-4'>
-      {EDTs.map((edt) => (
+      {selectedEdts.map((edt) => (
         <button
           className={`relative select-none pt-2 ${
-            edt === selectedEdt ? isSelectedStyle : null
+            edt === currentEdt ? isSelectedStyle : null
           }`}
-          onClick={() => setSelectedEdt(edt)}
+          onClick={() => setCurrentEdt(edt)}
           key={edt}
         >
           {edt}

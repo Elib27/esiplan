@@ -6,11 +6,13 @@ import PastDay from './pastDay'
 export default function DayLessons({
   lessons,
   scheduleDate,
+  isLoading,
 }: {
-  lessons: Lesson[]
+  lessons: Schedule
   scheduleDate: Date
+  isLoading: boolean
 }) {
-  const todayLessons: Lesson[] = lessons
+  const todayLessons: Schedule = lessons
     ?.filter(
       (lesson: Lesson) =>
         new Date(lesson.startTime).toLocaleDateString('fr-FR') ===
@@ -24,6 +26,18 @@ export default function DayLessons({
         <PastDay />
       </div>
     )
+  }
+
+  if (isLoading) {
+    return (
+      <div className='flex h-full min-h-0 w-[90vw] max-w-sm items-center justify-center'>
+        Loading...
+      </div>
+    )
+  }
+
+  if (!todayLessons) {
+    return <>Error</>
   }
 
   if (todayLessons.length === 0) {

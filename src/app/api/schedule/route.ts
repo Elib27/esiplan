@@ -1,10 +1,12 @@
-import { NextResponse } from 'next/server'
+import { NextRequest, NextResponse } from 'next/server'
 import ical from 'node-ical'
 import getLessonTypeFromString from '@/lib/getLessonTypeFromString'
 
-export async function GET() {
+export async function GET(request: NextRequest) {
+  const group = request.nextUrl.searchParams.get('group')
+
   const data = await ical.async.fromURL(
-    'https://edt.esisariens.org/ics/emploi_du_temps_3A-S1-TP1A.ics'
+    `https://edt.esisariens.org/ics/emploi_du_temps_${group}.ics`
   )
 
   const planning: Lesson[] = []
