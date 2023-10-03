@@ -1,4 +1,5 @@
-import { RefObject, useState } from 'react'
+import type { RefObject } from 'react'
+import { useState } from 'react'
 import useStore from '@/store/store'
 import useClickOutside from '@/hooks/useClickOutside'
 import CrossIcon from '@/assets/cross.svg'
@@ -6,9 +7,11 @@ import CrossIcon from '@/assets/cross.svg'
 export default function SelectedEdt({
   number,
   group,
+  groups,
 }: {
   number: number
   group: string
+  groups: string[]
 }) {
   const { selectedEdts, modifySelectedEdt, removeSelectedEdt } = useStore(
     (state) => {
@@ -21,29 +24,6 @@ export default function SelectedEdt({
   )
 
   const [isDropDownOpen, setIsDropDownOpen] = useState(false)
-
-  const groups = [
-    '1A-TP1',
-    '1A-TP2',
-    '1A-TP3',
-    '1A-TP4',
-    '2A-TP1',
-    '2A-TP2',
-    '2A-TP3',
-    '2A-TP4',
-    '3A-TP1',
-    '3A-TP2',
-    '3A-TP3',
-    '3A-TP4',
-    '4A-TP1',
-    '4A-TP2',
-    '4A-TP3',
-    '4A-TP4',
-    '5A-TP1',
-    '5A-TP2',
-    '5A-TP3',
-    '5A-TP4',
-  ]
 
   const unselectedGroups = groups.filter((g) => !selectedEdts.includes(g))
 
@@ -63,7 +43,9 @@ export default function SelectedEdt({
         onClick={() => setIsDropDownOpen(!isDropDownOpen)}
       >
         <span className='text-dark-gray'>{number}.</span>
-        <span className='font-medium'>{group || 'Sélectionner un EDT'}</span>
+        <span className="after:border-x-1 after:border-t-1 after:border-x-transparent relative cursor-pointer font-medium after:absolute after:-right-2 after:top-1/2 after:h-1 after:w-1 after:-translate-y-1/2 after:border-t-dark-gray after:bg-dark-gray after:content-['']">
+          {group || 'Sélectionner un groupe'}
+        </span>
         <button
           onClick={() => removeSelectedEdt(group)}
           className='rounded-full transition-colors hover:bg-main-purple/20 active:scale-90'
@@ -71,11 +53,11 @@ export default function SelectedEdt({
           <CrossIcon />
         </button>
       </div>
-      <div className='relative w-full'>
+      <div className='relative z-10 w-full'>
         <ul
           className={`${
             isDropDownOpen ? 'absolute' : 'hidden'
-          } bg-very-light-gray left-0 top-0 flex max-h-80 w-full flex-col gap-1 overflow-y-scroll rounded-b-md p-2`}
+          } left-0 top-0 flex max-h-80 w-full flex-col gap-1 overflow-y-scroll rounded-b-md bg-very-light-gray p-2`}
         >
           {unselectedGroups.map((g) => (
             <li

@@ -1,4 +1,5 @@
 'use client'
+import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import Option from '@/components/settings/option'
 import SelectedEdt from '@/components/settings/selectedEdt'
@@ -17,6 +18,19 @@ export default function SettingsPage() {
       }
     }
   )
+
+  const [groups, setGroups] = useState<string[]>([])
+
+  useEffect(() => {
+    async function getGroups() {
+      const response = await fetch('/api/groups', {
+        next: { revalidate: 3600 * 6 },
+      })
+      const groupsData = await response.json()
+      setGroups(groupsData)
+    }
+    getGroups()
+  }, [])
 
   const isAddButtonVisible =
     selectedEdts.length < 3 && !selectedEdts.includes('')
@@ -40,7 +54,12 @@ export default function SettingsPage() {
           <h2 className='pb-4 text-xl font-bold'>EDTs</h2>
           <div className='max-w flex w-full flex-col gap-4'>
             {selectedEdts.map((group, i) => (
-              <SelectedEdt key={group} number={i + 1} group={group} />
+              <SelectedEdt
+                number={i + 1}
+                group={group}
+                groups={groups}
+                key={group}
+              />
             ))}
           </div>
           {isAddButtonVisible && (
