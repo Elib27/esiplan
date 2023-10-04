@@ -43,7 +43,7 @@ export default function SelectedEdt({
         onClick={() => setIsDropDownOpen(!isDropDownOpen)}
       >
         <span className='text-dark-gray'>{number}.</span>
-        <span className="after:border-x-1 after:border-t-1 after:border-x-transparent relative cursor-pointer font-medium after:absolute after:-right-2 after:top-1/2 after:h-1 after:w-1 after:-translate-y-1/2 after:border-t-dark-gray after:bg-dark-gray after:content-['']">
+        <span className="relative cursor-pointer select-none font-medium after:absolute after:-right-4 after:top-1/2 after:-translate-y-1/2 after:border-x-[6px] after:border-t-8 after:border-x-light-purple after:border-t-dark-gray after:content-['']">
           {group || 'Sélectionner un groupe'}
         </span>
         <button
