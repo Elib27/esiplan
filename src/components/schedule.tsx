@@ -1,5 +1,7 @@
 'use client'
 import { useState } from 'react'
+// import useStore from '@/hooks/useStore'
+import { useSettingsStore } from '@/store/useSettingsStore'
 import TopMenu from './topMenu/topMenu'
 import DateNavigation from './dateNavigation'
 import DayLessons from './dayLessons'
@@ -8,7 +10,8 @@ import useSchedule from '@/hooks/useSchedule'
 
 export default function Schedule() {
   const [scheduleDate, setScheduleDate] = useState(new Date())
-  const [currentEdt, setCurrentEdt] = useState('3A-S1-TP1A')
+
+  const { currentEdt, setCurrentEdt } = useSettingsStore()
 
   const { data: schedule, isLoading } = useSchedule(currentEdt)
 

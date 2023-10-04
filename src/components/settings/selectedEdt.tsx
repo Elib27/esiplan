@@ -1,6 +1,7 @@
 import type { RefObject } from 'react'
 import { useState } from 'react'
-import useStore from '@/store/store'
+// import useStore from '@/hooks/useStore'
+import { useSettingsStore } from '@/store/useSettingsStore'
 import useClickOutside from '@/hooks/useClickOutside'
 import CrossIcon from '@/assets/cross.svg'
 
@@ -13,15 +14,8 @@ export default function SelectedEdt({
   group: string
   groups: string[]
 }) {
-  const { selectedEdts, modifySelectedEdt, removeSelectedEdt } = useStore(
-    (state) => {
-      return {
-        selectedEdts: state.selectedEdts,
-        modifySelectedEdt: state.modifySelectedEdt,
-        removeSelectedEdt: state.removeSelectedEdt,
-      }
-    }
-  )
+  const { selectedEdts, modifySelectedEdt, removeSelectedEdt } =
+    useSettingsStore()
 
   const [isDropDownOpen, setIsDropDownOpen] = useState(false)
 

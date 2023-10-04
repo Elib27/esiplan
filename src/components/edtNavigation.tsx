@@ -1,4 +1,5 @@
-import useStore from '@/store/store'
+import { useSettingsStore } from '@/store/useSettingsStore'
+// import useStore from '@/hooks/useStore'
 
 export default function EdtNavigation({
   currentEdt,
@@ -10,11 +11,11 @@ export default function EdtNavigation({
   const isSelectedStyle =
     "after:absolute after:left-0 after:top-0 after:h-[2px] after:w-full after:bg-main-purple after:content-['']"
 
-  const selectedEdts = useStore((state) => state.selectedEdts)
+  const { selectedEdts } = useSettingsStore()
 
   return (
     <div className='flex gap-4'>
-      {selectedEdts.map((edt) => (
+      {selectedEdts?.map((edt) => (
         <button
           className={`relative select-none pt-2 ${
             edt === currentEdt ? isSelectedStyle : null

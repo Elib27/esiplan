@@ -1,20 +1,18 @@
 'use client'
-import useStore from '@/store/store'
+import { useSettingsStore } from '@/store/useSettingsStore'
+// import useStore from '@/hooks/useStore'
 import Option from '@/components/settings/option'
 import SelectedEdt from '@/components/settings/selectedEdt'
 import AddIcon from '@/assets/add.svg'
 
 export default function Settings({ groups }: { groups: string[] }) {
-  const { isDarkMode, selectedEdts, toggleDarkMode, addSelectedEdt } = useStore(
-    (state) => {
-      return {
-        isDarkMode: state.darkMode,
-        selectedEdts: state.selectedEdts,
-        toggleDarkMode: state.toggleDarkMode,
-        addSelectedEdt: state.addSelectedEdt,
-      }
-    }
-  )
+  const { isDarkMode, selectedEdts, toggleDarkMode, addSelectedEdt } =
+    useSettingsStore((state) => ({
+      isDarkMode: state.darkMode,
+      selectedEdts: state.selectedEdts,
+      toggleDarkMode: state.toggleDarkMode,
+      addSelectedEdt: state.addSelectedEdt,
+    }))
 
   const isAddButtonVisible =
     selectedEdts.length < 3 && !selectedEdts.includes('')
