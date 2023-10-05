@@ -1,19 +1,16 @@
 'use client'
 import { useState } from 'react'
-// import useStore from '@/hooks/useStore'
+import useStore from '@/hooks/useStore'
 import { useSettingsStore } from '@/store/useSettingsStore'
 import TopMenu from './topMenu/topMenu'
 import DateNavigation from './dateNavigation'
 import DayLessons from './dayLessons'
 import EdtNavigation from './edtNavigation'
-import useSchedule from '@/hooks/useSchedule'
 
 export default function Schedule() {
+  const settingsStore = useStore(useSettingsStore, (state) => state)
+
   const [scheduleDate, setScheduleDate] = useState(new Date())
-
-  const { currentEdt, setCurrentEdt } = useSettingsStore()
-
-  const { data: schedule, isLoading } = useSchedule(currentEdt)
 
   const fullScheduleDate = scheduleDate.toLocaleDateString('fr-FR', {
     weekday: 'long',
@@ -21,6 +18,8 @@ export default function Schedule() {
     month: 'short',
     day: 'numeric',
   })
+
+  if (!settingsStore) return null
 
   return (
     <div className='flex h-full min-h-0 w-full flex-col items-center justify-between'>
@@ -31,13 +30,15 @@ export default function Schedule() {
         />
         <h3 className='py-4 text-center'>{fullScheduleDate}</h3>
         <DayLessons
-          lessons={schedule}
           scheduleDate={scheduleDate}
-          isLoading={isLoading}
+          currentEdt={settingsStore.currentEdt}
         />
       </div>
       <div className='flex w-full flex-col items-center justify-center border-t-2 border-light-gray'>
-        <EdtNavigation currentEdt={currentEdt} setCurrentEdt={setCurrentEdt} />
+        <EdtNavigation
+          currentEdt={settingsStore.currentEdt}
+          setCurrentEdt={settingsStore.setCurrentEdt}
+        />
         <DateNavigation
           setScheduleDate={setScheduleDate}
           scheduleDate={scheduleDate as Date}

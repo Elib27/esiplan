@@ -5,7 +5,7 @@ export default function EdtNavigation({
   currentEdt,
   setCurrentEdt,
 }: {
-  currentEdt: string
+  currentEdt: string | undefined
   setCurrentEdt: (edt: string) => void
 }) {
   const isSelectedStyle =

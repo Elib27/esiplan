@@ -1,21 +1,18 @@
 'use client'
 import { useSettingsStore } from '@/store/useSettingsStore'
-// import useStore from '@/hooks/useStore'
+import useStore from '@/hooks/useStore'
 import Option from '@/components/settings/option'
 import SelectedEdt from '@/components/settings/selectedEdt'
 import AddIcon from '@/assets/add.svg'
 
 export default function Settings({ groups }: { groups: string[] }) {
-  const { isDarkMode, selectedEdts, toggleDarkMode, addSelectedEdt } =
-    useSettingsStore((state) => ({
-      isDarkMode: state.darkMode,
-      selectedEdts: state.selectedEdts,
-      toggleDarkMode: state.toggleDarkMode,
-      addSelectedEdt: state.addSelectedEdt,
-    }))
+  const settingsStore = useStore(useSettingsStore, (state) => state)
+
+  if (!settingsStore) return null
 
   const isAddButtonVisible =
-    selectedEdts.length < 3 && !selectedEdts.includes('')
+    settingsStore.selectedEdts.length < 3 &&
+    !settingsStore.selectedEdts.includes('')
 
   return (
     <main className='flex flex-col items-center'>
@@ -25,13 +22,13 @@ export default function Settings({ groups }: { groups: string[] }) {
         <div className='flex flex-col gap-6 pb-10'>
           <Option
             title='Dark Mode'
-            isActivated={isDarkMode}
-            onClick={() => toggleDarkMode()}
+            isActivated={settingsStore.darkMode}
+            onClick={() => settingsStore.toggleDarkMode()}
           />
         </div>
         <h2 className='pb-4 text-xl font-bold'>EDTs</h2>
         <div className='max-w flex w-full flex-col gap-4'>
-          {selectedEdts.map((group, i) => (
+          {settingsStore.selectedEdts.map((group, i) => (
             <SelectedEdt
               number={i + 1}
               group={group}
@@ -44,7 +41,7 @@ export default function Settings({ groups }: { groups: string[] }) {
           <div className='flex justify-center pt-4'>
             <button
               className='rounded-full bg-light-purple p-2 active:scale-95'
-              onClick={() => addSelectedEdt('')}
+              onClick={() => settingsStore.addSelectedEdt('')}
             >
               <AddIcon />
             </button>

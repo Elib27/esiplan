@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query'
 
-export default function useSchedule(group: string) {
+export default function useSchedule(group: string | undefined) {
   return useQuery({
     queryKey: ['schedule', group],
     queryFn: () =>
@@ -8,5 +8,6 @@ export default function useSchedule(group: string) {
         res.json()
       ),
     staleTime: 1000 * 3600 * 6, // 6 hours
+    enabled: !!group,
   })
 }

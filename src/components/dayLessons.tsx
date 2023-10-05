@@ -1,24 +1,33 @@
+import useSchedule from '@/hooks/useSchedule'
+import sortLessonsByDate from '@/lib/sortLessonsByDate'
 import LessonCard from './lessonCard'
 import NoClass from './noClass'
-import sortLessonsByDate from '@/lib/sortLessonsByDate'
 import PastDay from './pastDay'
 
 export default function DayLessons({
-  lessons,
   scheduleDate,
-  isLoading,
+  currentEdt,
 }: {
-  lessons: Schedule
   scheduleDate: Date
-  isLoading: boolean
+  currentEdt: string | undefined
 }) {
-  const todayLessons: Schedule = lessons
+  const { data: schedule, isLoading } = useSchedule(currentEdt)
+
+  const todaySchedule: Schedule = schedule
     ?.filter(
       (lesson: Lesson) =>
         new Date(lesson.startTime).toLocaleDateString('fr-FR') ===
         scheduleDate.toLocaleDateString('fr-FR')
     )
     ?.sort(sortLessonsByDate)
+
+  if (!currentEdt) {
+    return (
+      <div className='flex h-full min-h-0 w-[90vw] max-w-sm items-center justify-center text-center'>
+        Aucun EDT sélectionné, va dans les paramètre pour en sélectionner un.
+      </div>
+    )
+  }
 
   if (scheduleDate.getTime() < new Date().setHours(0, 0, 0)) {
     return (
@@ -36,11 +45,11 @@ export default function DayLessons({
     )
   }
 
-  if (!todayLessons) {
+  if (!todaySchedule) {
     return <>Error</>
   }
 
-  if (todayLessons.length === 0) {
+  if (todaySchedule.length === 0) {
     return (
       <div className='flex h-full min-h-0 w-[90vw] max-w-sm items-center justify-center'>
         <NoClass />
@@ -50,7 +59,7 @@ export default function DayLessons({
 
   return (
     <div className='flex min-h-0 w-[90vw] max-w-sm flex-col items-center gap-4 overflow-y-auto px-2 pb-4'>
-      {todayLessons.map((lesson: Lesson) => (
+      {todaySchedule.map((lesson: Lesson) => (
         <LessonCard
           subject={lesson.subject}
           type={lesson.type}
