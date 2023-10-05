@@ -14,15 +14,33 @@ export default function SelectedEdt({
   group: string
   groups: string[]
 }) {
-  const { selectedEdts, modifySelectedEdt, removeSelectedEdt } =
-    useSettingsStore()
+  const {
+    currentEdt,
+    selectedEdts,
+    setCurrentEdt,
+    modifySelectedEdt,
+    removeSelectedEdt,
+  } = useSettingsStore()
 
   const [isDropDownOpen, setIsDropDownOpen] = useState(false)
 
   const unselectedGroups = groups.filter((g) => !selectedEdts.includes(g))
 
-  function handleClickSelectEdt(edt: string) {
-    modifySelectedEdt(edt, number - 1)
+  function updateCurrentEdt(edtToRemove: string) {
+    if (currentEdt !== edtToRemove) return
+    const newSelectedEdts = selectedEdts.filter((e) => e !== edtToRemove)
+    if (newSelectedEdts.length === 0) setCurrentEdt('')
+    else setCurrentEdt(newSelectedEdts[0])
+  }
+
+  function handleClickRemoveEdt(edtToRemove: string) {
+    updateCurrentEdt(edtToRemove)
+    removeSelectedEdt(edtToRemove)
+  }
+
+  function handleClickSelectEdt(newEdt: string) {
+    if (group === currentEdt) setCurrentEdt(newEdt)
+    modifySelectedEdt(newEdt, number - 1)
     setIsDropDownOpen(false)
   }
 
@@ -41,7 +59,7 @@ export default function SelectedEdt({
           {group || 'Sélectionner un groupe'}
         </span>
         <button
-          onClick={() => removeSelectedEdt(group)}
+          onClick={() => handleClickRemoveEdt(group)}
           className='rounded-full transition-colors hover:bg-main-purple/20 active:scale-90'
         >
           <CrossIcon />
