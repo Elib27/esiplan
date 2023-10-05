@@ -1,14 +1,17 @@
 'use client'
 import { useSettingsStore } from '@/store/useSettingsStore'
 import useStore from '@/hooks/useStore'
+import useGroups from '@/hooks/useGroups'
 import Option from '@/components/settings/option'
 import SelectedEdt from '@/components/settings/selectedEdt'
 import AddIcon from '@/assets/add.svg'
 
-export default function Settings({ groups }: { groups: string[] }) {
+export default function Settings() {
   const settingsStore = useStore(useSettingsStore, (state) => state)
 
-  if (!settingsStore) return null
+  const { data: groups } = useGroups()
+
+  if (!settingsStore || !groups) return null
 
   const isAddButtonVisible =
     settingsStore.selectedEdts.length < 3 &&
