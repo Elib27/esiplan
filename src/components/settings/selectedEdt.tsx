@@ -1,6 +1,5 @@
 import type { RefObject } from 'react'
 import { useState } from 'react'
-// import useStore from '@/hooks/useStore'
 import { useSettingsStore } from '@/store/useSettingsStore'
 import useClickOutside from '@/hooks/useClickOutside'
 import CrossIcon from '@/assets/cross.svg'
@@ -26,7 +25,7 @@ export default function SelectedEdt({
 
   const unselectedGroups = groups.filter((g) => !selectedEdts.includes(g))
 
-  function updateCurrentEdt(edtToRemove: string) {
+  function updateCurrentEdtWhenRemove(edtToRemove: string) {
     if (currentEdt !== edtToRemove) return
     const newSelectedEdts = selectedEdts.filter((e) => e !== edtToRemove)
     if (newSelectedEdts.length === 0) setCurrentEdt('')
@@ -34,12 +33,12 @@ export default function SelectedEdt({
   }
 
   function handleClickRemoveEdt(edtToRemove: string) {
-    updateCurrentEdt(edtToRemove)
+    updateCurrentEdtWhenRemove(edtToRemove)
     removeSelectedEdt(edtToRemove)
   }
 
   function handleClickSelectEdt(newEdt: string) {
-    if (group === currentEdt) setCurrentEdt(newEdt)
+    if (group === currentEdt || selectedEdts.length <= 1) setCurrentEdt(newEdt)
     modifySelectedEdt(newEdt, number - 1)
     setIsDropDownOpen(false)
   }
