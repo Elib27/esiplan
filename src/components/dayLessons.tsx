@@ -23,7 +23,7 @@ export default function DayLessons({
 
   if (!currentEdt) {
     return (
-      <div className='flex h-full min-h-0 w-[90vw] max-w-sm items-center justify-center text-center'>
+      <div className='flex h-full min-h-0 w-[90vw] max-w-sm items-center justify-center text-center transition-colors dark:text-white'>
         Aucun EDT sélectionné, va dans les paramètre pour en sélectionner un.
       </div>
     )
@@ -31,7 +31,7 @@ export default function DayLessons({
 
   if (scheduleDate.getTime() < new Date().setHours(0, 0, 0)) {
     return (
-      <div className='flex h-full min-h-0 w-[90vw] max-w-sm items-center justify-center'>
+      <div className='flex h-full min-h-0 w-[90vw] max-w-sm items-center justify-center transition-colors dark:text-white'>
         <PastDay />
       </div>
     )
@@ -39,7 +39,7 @@ export default function DayLessons({
 
   if (isLoading) {
     return (
-      <div className='flex h-full min-h-0 w-[90vw] max-w-sm items-center justify-center'>
+      <div className='flex h-full min-h-0 w-[90vw] max-w-sm items-center justify-center transition-colors dark:text-white'>
         Loading...
       </div>
     )
@@ -51,7 +51,7 @@ export default function DayLessons({
 
   if (todaySchedule.length === 0) {
     return (
-      <div className='flex h-full min-h-0 w-[90vw] max-w-sm items-center justify-center'>
+      <div className='flex h-full min-h-0 w-[90vw] max-w-sm items-center justify-center transition-colors dark:text-white'>
         <NoClass />
       </div>
     )

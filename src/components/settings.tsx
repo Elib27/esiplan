@@ -20,8 +20,12 @@ export default function Settings() {
   return (
     <main className='flex flex-col items-center'>
       <div className='w-10/12 max-w-xl'>
-        <h1 className='pb-8 pt-4 text-4xl font-medium'>Paramètres</h1>
-        <h2 className='pb-4 text-xl font-bold'>Options</h2>
+        <h1 className='pb-8 pt-4 text-4xl font-medium transition-colors dark:text-white'>
+          Paramètres
+        </h1>
+        <h2 className='pb-4 text-xl font-bold transition-colors dark:text-white'>
+          Options
+        </h2>
         <div className='flex flex-col gap-6 pb-10'>
           <Option
             title='Dark Mode'
@@ -29,7 +33,9 @@ export default function Settings() {
             onClick={() => settingsStore.toggleDarkMode()}
           />
         </div>
-        <h2 className='pb-4 text-xl font-bold'>EDTs</h2>
+        <h2 className='pb-4 text-xl font-bold transition-colors dark:text-white'>
+          EDTs
+        </h2>
         <div className='max-w flex w-full flex-col gap-4'>
           {settingsStore.selectedEdts.map((group, i) => (
             <SelectedEdt

@@ -33,7 +33,6 @@ export default function TopMenu({
       >
         <CalendarIcon />
       </button>
-
       <Link
         href='/settings'
         className='flex aspect-square h-12 items-center justify-center rounded-full bg-light-purple'
@@ -41,7 +40,7 @@ export default function TopMenu({
         <GearIcon />
       </Link>
       {isDatePickerOpen && (
-        <div className='z-99 absolute left-0 top-0 flex h-screen w-full items-center justify-center bg-light-purple/75'>
+        <div className='z-99 absolute left-0 top-0 flex h-screen w-full items-center justify-center bg-light-purple/75 transition-colors dark:bg-dark-gray/75'>
           <DatePicker
             selected={scheduleDate}
             inline

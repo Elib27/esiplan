@@ -11,6 +11,8 @@ const config: Config = {
       white: '#FCFCFC',
       'main-purple': '#8A47CD',
       'light-purple': '#D0BFE1',
+      'dark-purple': '#0E051D',
+      'gray-purple': '#2D243D',
       'dark-gray': '#49454F',
       'light-gray': '#B7B3BE',
       'very-light-gray': '#E7E7E7',
@@ -27,6 +29,7 @@ const config: Config = {
       },
     },
   },
+  darkMode: 'class',
   plugins: [],
 }
 export default config

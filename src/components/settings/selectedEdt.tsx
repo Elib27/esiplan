@@ -68,7 +68,7 @@ export default function SelectedEdt({
         <ul
           className={`${
             isDropDownOpen ? 'absolute' : 'hidden'
-          } left-0 top-0 flex max-h-80 w-full flex-col gap-1 overflow-y-scroll rounded-b-md bg-very-light-gray p-2`}
+          } dark:bg-gray-purple left-0 top-0 flex max-h-80 w-full flex-col gap-1 overflow-y-scroll rounded-b-md bg-very-light-gray p-2 transition-colors dark:text-white`}
         >
           {unselectedGroups.map((g) => (
             <li

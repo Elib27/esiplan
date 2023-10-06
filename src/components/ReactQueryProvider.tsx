@@ -5,7 +5,11 @@ import { PersistQueryClientProvider } from '@tanstack/react-query-persist-client
 import { createSyncStoragePersister } from '@tanstack/query-sync-storage-persister'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 
-export default function Providers({ children }: { children: React.ReactNode }) {
+export default function ReactQueryProvider({
+  children,
+}: {
+  children: React.ReactNode
+}) {
   const [queryClient] = useState(
     () =>
       new QueryClient({

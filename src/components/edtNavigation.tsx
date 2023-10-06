@@ -17,7 +17,7 @@ export default function EdtNavigation({
     <div className='flex gap-4'>
       {selectedEdts?.map((edt) => (
         <button
-          className={`relative select-none pt-2 ${
+          className={`relative select-none pt-2 transition-colors dark:text-white ${
             edt === currentEdt ? isSelectedStyle : null
           }`}
           onClick={() => setCurrentEdt(edt)}

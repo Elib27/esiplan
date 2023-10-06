@@ -1,7 +1,8 @@
 import './globals.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
-import Providers from '@/components/providers'
+import ReactQueryProvider from '@/components/ReactQueryProvider'
+import ThemeProvider from '@/components/themeProvider'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -54,8 +55,14 @@ export default function RootLayout({
 }) {
   return (
     <html lang='en'>
-      <body className={inter.className + ' bg-white'}>
-        <Providers>{children}</Providers>
+      <body
+        className={
+          inter.className + ' dark:bg-dark-purple bg-white transition-colors'
+        }
+      >
+        <ThemeProvider>
+          <ReactQueryProvider>{children}</ReactQueryProvider>
+        </ThemeProvider>
       </body>
     </html>
   )

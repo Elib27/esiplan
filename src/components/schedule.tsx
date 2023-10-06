@@ -28,7 +28,9 @@ export default function Schedule() {
           scheduleDate={scheduleDate}
           setScheduleDate={setScheduleDate}
         />
-        <h3 className='py-4 text-center'>{fullScheduleDate}</h3>
+        <h3 className='py-4 text-center transition-colors dark:text-white'>
+          {fullScheduleDate}
+        </h3>
         <DayLessons
           scheduleDate={scheduleDate}
           currentEdt={settingsStore.currentEdt}

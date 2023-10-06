@@ -49,7 +49,7 @@ export default function LessonCard({
     <div
       className={`${
         cardSizes[getCardHeightWithDuration(lessonDuration)]
-      } shadow-card flex w-full flex-shrink-0 items-center gap-2 overflow-hidden rounded-2xl bg-main-purple`}
+      } flex w-full flex-shrink-0 items-center gap-2 overflow-hidden rounded-2xl bg-main-purple shadow-card`}
     >
       <div className='flex h-full flex-col justify-between py-3 pl-3'>
         <span className='text-sm text-white'>{formatTime(startTime)}</span>
