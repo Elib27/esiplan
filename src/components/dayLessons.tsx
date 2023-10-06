@@ -1,8 +1,7 @@
 import useSchedule from '@/hooks/useSchedule'
 import sortLessonsByDate from '@/lib/sortLessonsByDate'
 import LessonCard from './lessonCard'
-import NoClass from './noClass'
-import PastDay from './pastDay'
+import LoaderIcon from '@/assets/loader.svg'
 
 export default function DayLessons({
   scheduleDate,
@@ -21,38 +20,46 @@ export default function DayLessons({
     )
     ?.sort(sortLessonsByDate)
 
+  const isPassedDay = scheduleDate.getTime() < new Date().setHours(0, 0, 0)
+
   if (!currentEdt) {
     return (
       <div className='flex h-full min-h-0 w-[90vw] max-w-sm items-center justify-center text-center transition-colors dark:text-white'>
-        Aucun EDT sélectionné, va dans les paramètre pour en sélectionner un.
+        Aucun EDT sélectionné, va dans les paramètres pour en sélectionner un.
       </div>
     )
   }
 
-  if (scheduleDate.getTime() < new Date().setHours(0, 0, 0)) {
+  if (isPassedDay) {
     return (
       <div className='flex h-full min-h-0 w-[90vw] max-w-sm items-center justify-center transition-colors dark:text-white'>
-        <PastDay />
+        <span>Le passé c&apos;est le passé</span>
       </div>
     )
   }
 
   if (isLoading) {
     return (
-      <div className='flex h-full min-h-0 w-[90vw] max-w-sm items-center justify-center transition-colors dark:text-white'>
-        Loading...
+      <div className='flex h-full min-h-0 w-[90vw] max-w-sm items-center justify-center text-main-purple transition-colors dark:text-light-purple'>
+        <LoaderIcon className='animate-spin' />
       </div>
     )
   }
 
   if (!todaySchedule) {
-    return <>Error</>
+    return (
+      <div className='flex h-full min-h-0 w-[90vw] max-w-sm items-center justify-center text-main-purple transition-colors dark:text-light-purple'>
+        <span>
+          Une erreur s&apos;est produite lors de la récupération de l&apos;EDT
+        </span>
+      </div>
+    )
   }
 
   if (todaySchedule.length === 0) {
     return (
       <div className='flex h-full min-h-0 w-[90vw] max-w-sm items-center justify-center transition-colors dark:text-white'>
-        <NoClass />
+        <span>Pas de cours 😎</span>
       </div>
     )
   }

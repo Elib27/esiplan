@@ -57,7 +57,7 @@ export default function RootLayout({
     <html lang='en'>
       <body
         className={
-          inter.className + ' dark:bg-dark-purple bg-white transition-colors'
+          inter.className + ' bg-white transition-colors dark:bg-dark-purple'
         }
       >
         <ThemeProvider>
