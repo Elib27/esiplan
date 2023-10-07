@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query'
 
 async function getGroups() {
-  const response = await fetch('http://localhost:3000/api/groups')
+  const response = await fetch('/api/groups')
   if (!response.ok) {
     throw new Error('Failed to fetch groups')
   }

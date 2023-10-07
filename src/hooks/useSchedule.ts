@@ -1,9 +1,7 @@
 import { useQuery } from '@tanstack/react-query'
 
 async function getGroupSchedule(group: string | undefined) {
-  const response = await fetch(
-    `http://localhost:3000/api/schedule?group=${group}`
-  )
+  const response = await fetch(`/api/schedule?group=${group}`)
   if (!response.ok) {
     throw new Error(`Failed to fetch schedule: ${group}`)
   }
