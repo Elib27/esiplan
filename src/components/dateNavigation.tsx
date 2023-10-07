@@ -23,18 +23,21 @@ export default function DateNavigation({
       <button
         className='flex aspect-square h-14 items-center justify-center rounded-full bg-light-purple active:scale-95'
         onClick={handleClickPrevDay}
+        aria-label='Jour précédent'
       >
         <ArrowLeftIcon className='relative right-px' />
       </button>
       <button
         className='flex aspect-square h-14 items-center justify-center rounded-full bg-light-purple active:scale-95'
         onClick={handleClickToday}
+        aria-label="Aujourd'hui"
       >
         <TodayIcon />
       </button>
       <button
         className='flex aspect-square h-14 items-center justify-center rounded-full bg-light-purple active:scale-95'
         onClick={handleClickNextDay}
+        aria-label='Jour suivant'
       >
         <ArrowRightIcon className='relative left-px' />
       </button>

@@ -21,12 +21,14 @@ export default function TopMenu({
       <button
         className='flex aspect-square h-12 items-center justify-center rounded-full bg-light-purple'
         onClick={() => setIsDatePickerOpen(!isDatePickerOpen)}
+        aria-label='Ouvrir le date picker'
       >
         <CalendarIcon />
       </button>
       <Link
         href='/settings'
         className='flex aspect-square h-12 items-center justify-center rounded-full bg-light-purple'
+        aria-label='Aller aux paramètres'
       >
         <GearIcon />
       </Link>
