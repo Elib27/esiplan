@@ -1,15 +1,11 @@
 import type { Dispatch, SetStateAction } from 'react'
 import { useState } from 'react'
 import Link from 'next/link'
-import DatePicker from 'react-datepicker'
-import 'react-datepicker/dist/react-datepicker.css'
-import './date-picker.css'
-import { registerLocale } from 'react-datepicker'
-import fr from 'date-fns/locale/fr'
+import dynamic from 'next/dynamic'
 import GearIcon from '@/assets/gear.svg'
 import CalendarIcon from '@/assets/calendar.svg'
 
-registerLocale('fr', fr)
+const DatePicker = dynamic(() => import('@/components/datePicker/datePicker'))
 
 export default function TopMenu({
   scheduleDate,
@@ -19,11 +15,6 @@ export default function TopMenu({
   setScheduleDate: Dispatch<SetStateAction<Date>>
 }) {
   const [isDatePickerOpen, setIsDatePickerOpen] = useState(false)
-
-  function handleDateChange(date: Date) {
-    setScheduleDate(date)
-    setIsDatePickerOpen(false)
-  }
 
   return (
     <div className='z-10 flex w-full justify-between px-8 pt-4'>
@@ -40,15 +31,11 @@ export default function TopMenu({
         <GearIcon />
       </Link>
       {isDatePickerOpen && (
-        <div className='z-99 absolute left-0 top-0 flex h-screen w-full items-center justify-center bg-light-purple/75 transition-colors dark:bg-dark-gray/75'>
-          <DatePicker
-            selected={scheduleDate}
-            inline
-            onChange={handleDateChange}
-            locale='fr'
-            onClickOutside={() => setIsDatePickerOpen(false)}
-          />
-        </div>
+        <DatePicker
+          scheduleDate={scheduleDate}
+          setScheduleDate={setScheduleDate}
+          setIsDatePickerOpen={setIsDatePickerOpen}
+        />
       )}
     </div>
   )

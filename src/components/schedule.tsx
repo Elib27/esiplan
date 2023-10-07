@@ -2,7 +2,7 @@
 import { useState } from 'react'
 import useStore from '@/hooks/useStore'
 import { useSettingsStore } from '@/store/useSettingsStore'
-import TopMenu from './topMenu/topMenu'
+import TopMenu from './settings/topMenu'
 import DateNavigation from './dateNavigation'
 import DayLessons from './dayLessons'
 import EdtNavigation from './edtNavigation'
