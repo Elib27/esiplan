@@ -1,21 +1,16 @@
+import { Dispatch, SetStateAction } from 'react'
 import addDaysToDate from '@/lib/addDaysToDate'
 import ArrowLeftIcon from '@/assets/arrow-left.svg'
 import ArrowRightIcon from '@/assets/arrow-right.svg'
 import TodayIcon from '@/assets/today.svg'
 
-type dateNavigationProps = {
-  scheduleDate: Date
-  setScheduleDate: (date: Date) => void
-}
-
 export default function DateNavigation({
-  scheduleDate,
   setScheduleDate,
-}: dateNavigationProps) {
-  const handleClickPrevDay = () =>
-    setScheduleDate(addDaysToDate(scheduleDate, -1))
-  const handleClickNextDay = () =>
-    setScheduleDate(addDaysToDate(scheduleDate, 1))
+}: {
+  setScheduleDate: Dispatch<SetStateAction<Date>>
+}) {
+  const handleClickPrevDay = () => setScheduleDate((d) => addDaysToDate(d, -1))
+  const handleClickNextDay = () => setScheduleDate((d) => addDaysToDate(d, 1))
   const handleClickToday = () => setScheduleDate(new Date())
 
   return (
