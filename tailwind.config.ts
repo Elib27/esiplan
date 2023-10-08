@@ -10,6 +10,7 @@ const config: Config = {
     colors: {
       white: '#FCFCFC',
       'main-purple': '#8A47CD',
+      'secondary-purple': '#6750A4',
       'light-purple': '#D0BFE1',
       'dark-purple': '#0E051D',
       'gray-purple': '#2D243D',

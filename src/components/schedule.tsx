@@ -39,7 +39,7 @@ export default function Schedule() {
           />
         </DayScheduleLayout>
       </div>
-      <div className='flex w-full flex-col items-center justify-center border-t-2 border-light-gray'>
+      <div className='dark:border-secondary-purple flex w-full flex-col items-center justify-center border-t-2 border-light-gray'>
         <EdtNavigation
           currentEdt={settingsStore.currentEdt}
           setCurrentEdt={settingsStore.setCurrentEdt}
