@@ -4,7 +4,8 @@ import useStore from '@/hooks/useStore'
 import { useSettingsStore } from '@/store/useSettingsStore'
 import TopMenu from './settings/topMenu'
 import DateNavigation from './dateNavigation'
-import DayLessons from './dayLessons'
+import DayScheduleLayout from './daySchedule/dayScheduleSwipeLayout'
+import DayLessons from './daySchedule/daySchedule'
 import EdtNavigation from './edtNavigation'
 
 export default function Schedule() {
@@ -31,20 +32,19 @@ export default function Schedule() {
         <h3 className='py-4 text-center transition-colors dark:text-white'>
           {fullScheduleDate}
         </h3>
-        <DayLessons
-          scheduleDate={scheduleDate}
-          currentEdt={settingsStore.currentEdt}
-        />
+        <DayScheduleLayout setScheduleDate={setScheduleDate}>
+          <DayLessons
+            scheduleDate={scheduleDate}
+            currentEdt={settingsStore.currentEdt}
+          />
+        </DayScheduleLayout>
       </div>
       <div className='flex w-full flex-col items-center justify-center border-t-2 border-light-gray'>
         <EdtNavigation
           currentEdt={settingsStore.currentEdt}
           setCurrentEdt={settingsStore.setCurrentEdt}
         />
-        <DateNavigation
-          setScheduleDate={setScheduleDate}
-          scheduleDate={scheduleDate as Date}
-        />
+        <DateNavigation setScheduleDate={setScheduleDate} />
       </div>
     </div>
   )

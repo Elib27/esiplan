@@ -1,5 +1,4 @@
 import { useSettingsStore } from '@/store/useSettingsStore'
-// import useStore from '@/hooks/useStore'
 
 export default function EdtNavigation({
   currentEdt,
