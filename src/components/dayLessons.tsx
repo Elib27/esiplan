@@ -33,7 +33,7 @@ export default function DayLessons({
   if (isPassedDay) {
     return (
       <div className='flex h-full min-h-0 w-[90vw] max-w-sm items-center justify-center transition-colors dark:text-white'>
-        <span>Le passé c&apos;est le passé</span>
+        <span>Le passé c&apos;est le passé ⌚</span>
       </div>
     )
   }
@@ -65,7 +65,7 @@ export default function DayLessons({
   }
 
   return (
-    <div className='flex min-h-0 w-[90vw] max-w-sm flex-col items-center gap-4 overflow-y-auto px-2 pb-4'>
+    <div className='flex min-h-0 w-full flex-col items-center gap-4 overflow-y-auto px-2 pb-4'>
       {todaySchedule.map((lesson: Lesson) => (
         <LessonCard
           subject={lesson.subject}
