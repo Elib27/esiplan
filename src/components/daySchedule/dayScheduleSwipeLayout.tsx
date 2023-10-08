@@ -11,7 +11,7 @@ export default function DayScheduleSwipeLayout({
   const touchstartX = useRef<number | null>(null)
   const touchEndX = useRef<number | null>(null)
 
-  const MIN_SWIPE_DISTANCE = 50
+  const MIN_SWIPE_DISTANCE = 30
 
   const navigateToPrevDay = () => setScheduleDate((d) => addDaysToDate(d, -1))
   const navigateToNextDay = () => setScheduleDate((d) => addDaysToDate(d, 1))
