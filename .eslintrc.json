@@ -7,6 +7,8 @@
   ],
   "plugins": ["@typescript-eslint", "@tanstack/query"],
   "rules": {
-    "prefer-const": "error"
+    "prefer-const": "error",
+    "@typescript-eslint/no-explicit-any": "off",
+    "@typescript-eslint/no-this-alias": "off"
   }
 }

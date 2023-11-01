@@ -9,6 +9,7 @@ const config: Config = {
   theme: {
     colors: {
       white: '#FCFCFC',
+      black: '#181818',
       'main-purple': '#8A47CD',
       'secondary-purple': '#6750A4',
       'light-purple': '#D0BFE1',
@@ -17,12 +18,12 @@ const config: Config = {
       'dark-gray': '#49454F',
       'light-gray': '#B7B3BE',
       'very-light-gray': '#E7E7E7',
-      'color-cm': '#ADB0F4',
-      'color-td': '#E9CCA0',
-      'color-tp': '#C4E4AA',
-      'color-ds': '#F5D45E',
-      'color-ex': '#F07676',
-      'color-au': '#E27EF2',
+      // 'color-cm': '#ADB0F4',
+      // 'color-td': '#E9CCA0',
+      // 'color-tp': '#C4E4AA',
+      // 'color-ds': '#F5D45E',
+      // 'color-ex': '#F07676',
+      // 'color-au': '#E27EF2',
     },
     extend: {
       boxShadow: {

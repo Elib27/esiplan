@@ -2,6 +2,7 @@
 import { useSettingsStore } from '@/store/useSettingsStore'
 import useStore from '@/hooks/useStore'
 import useGroups from '@/hooks/useGroups'
+import ColorPickers from './colorPickers'
 import Option from '@/components/settings/option'
 import SelectedEdt from '@/components/settings/selectedEdt'
 import AddIcon from '@/assets/add.svg'
@@ -36,7 +37,7 @@ export default function Settings() {
         <h2 className='pb-4 text-xl font-bold transition-colors dark:text-white'>
           EDTs
         </h2>
-        <div className='max-w flex w-full flex-col gap-4'>
+        <div className='max-w flex w-full flex-col items-center gap-4 pb-10'>
           {settingsStore.selectedEdts.map((group, i) => (
             <SelectedEdt
               number={i + 1}
@@ -45,17 +46,19 @@ export default function Settings() {
               key={group}
             />
           ))}
-        </div>
-        {isAddButtonVisible && (
-          <div className='flex justify-center pt-4'>
+          {isAddButtonVisible && (
             <button
-              className='rounded-full bg-light-purple p-2 active:scale-95'
+              className='flex-grow-0 rounded-full bg-light-purple p-2 active:scale-95'
               onClick={() => settingsStore.addSelectedEdt('')}
             >
               <AddIcon />
             </button>
-          </div>
-        )}
+          )}
+        </div>
+        <h2 className='pb-4 text-xl font-bold transition-colors dark:text-white'>
+          Colors
+        </h2>
+        <ColorPickers />
       </div>
     </main>
   )
