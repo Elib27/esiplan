@@ -1,5 +1,5 @@
 'use client'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import useStore from '@/hooks/useStore'
 import { useSettingsStore } from '@/store/useSettingsStore'
 import TopMenu from './settings/topMenu'
@@ -12,6 +12,19 @@ export default function Schedule() {
   const settingsStore = useStore(useSettingsStore, (state) => state)
 
   const [scheduleDate, setScheduleDate] = useState(new Date())
+
+  // Update colors when settings change
+  useEffect(() => {
+    if (!settingsStore) return
+    for (const [lessonType, color] of Object.entries(
+      settingsStore.lessonTypesColors
+    )) {
+      document.documentElement.style.setProperty(
+        `--color-${lessonType.toLowerCase()}`,
+        color
+      )
+    }
+  }, [settingsStore?.lessonTypesColors])
 
   const fullScheduleDate = scheduleDate.toLocaleDateString('fr-FR', {
     weekday: 'long',
@@ -39,7 +52,7 @@ export default function Schedule() {
           />
         </DayScheduleLayout>
       </div>
-      <div className='dark:border-secondary-purple flex w-full flex-col items-center justify-center border-t-2 border-light-gray'>
+      <div className='flex w-full flex-col items-center justify-center border-t-2 border-light-gray dark:border-secondary-purple'>
         <EdtNavigation
           currentEdt={settingsStore.currentEdt}
           setCurrentEdt={settingsStore.setCurrentEdt}

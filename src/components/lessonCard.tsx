@@ -28,13 +28,13 @@ export default function LessonCard({
   startTime,
   endTime,
 }: LessonCardProps) {
-  const lessonTypeBgColors: { readonly [index: string]: string } = {
-    cm: 'bg-color-cm',
-    td: 'bg-color-td',
-    tp: 'bg-color-tp',
-    ds: 'bg-color-ds',
-    ex: 'bg-color-ex',
-    au: 'bg-color-au',
+  const typeColors: { readonly [index: string]: string } = {
+    CM: 'bg-[--color-cm]',
+    TD: 'bg-[--color-td]',
+    TP: 'bg-[--color-tp]',
+    DS: 'bg-[--color-ds]',
+    EX: 'bg-[--color-ex]',
+    AU: 'bg-[--color-au]',
   }
 
   const cardSizes: { readonly [index: number]: string } = {
@@ -64,9 +64,9 @@ export default function LessonCard({
         </span>
       </div>
       <div
-        className={`${
-          lessonTypeBgColors[type.toLocaleLowerCase()]
-        } flex h-full items-center justify-center`}
+        className={`flex h-full items-center justify-center ${
+          typeColors[type.toUpperCase()]
+        }`}
       >
         <span className='px-4 font-bold'>{type.toUpperCase()}</span>
       </div>

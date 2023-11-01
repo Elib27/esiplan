@@ -1,6 +1,6 @@
 'use client'
 import Link from 'next/link'
-import Settings from '@/components/settings'
+import Settings from '@/components/settings/settings'
 import BackIcon from '@/assets/arrow-back.svg'
 
 export default function SettingsPage() {
