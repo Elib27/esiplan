@@ -15,7 +15,7 @@ export default function Schedule() {
 
   // Update colors when settings change
   useEffect(() => {
-    if (!settingsStore) return
+    if (!settingsStore?.lessonTypesColors) return
     for (const [lessonType, color] of Object.entries(
       settingsStore.lessonTypesColors
     )) {
