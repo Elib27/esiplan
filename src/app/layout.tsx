@@ -20,7 +20,7 @@ export const metadata: Metadata = {
   },
   description: APP_DESCRIPTION,
   manifest: '/manifest.json',
-  themeColor: '#FFFFFF',
+  themeColor: '#8A47CD',
   appleWebApp: {
     capable: true,
     statusBarStyle: 'default',
@@ -30,23 +30,6 @@ export const metadata: Metadata = {
   formatDetection: {
     telephone: false,
   },
-  // openGraph: {
-  //   type: 'website',
-  //   siteName: APP_NAME,
-  //   title: {
-  //     default: APP_DEFAULT_TITLE,
-  //     template: APP_TITLE_TEMPLATE,
-  //   },
-  //   description: APP_DESCRIPTION,
-  // },
-  // twitter: {
-  //   card: 'summary',
-  //   title: {
-  //     default: APP_DEFAULT_TITLE,
-  //     template: APP_TITLE_TEMPLATE,
-  //   },
-  //   description: APP_DESCRIPTION,
-  // },
 }
 
 export default function RootLayout({
