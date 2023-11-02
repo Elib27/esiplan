@@ -18,12 +18,6 @@ const config: Config = {
       'dark-gray': '#49454F',
       'light-gray': '#B7B3BE',
       'very-light-gray': '#E7E7E7',
-      // 'color-cm': '#ADB0F4',
-      // 'color-td': '#E9CCA0',
-      // 'color-tp': '#C4E4AA',
-      // 'color-ds': '#F5D45E',
-      // 'color-ex': '#F07676',
-      // 'color-au': '#E27EF2',
     },
     extend: {
       boxShadow: {
