@@ -1,6 +1,6 @@
 import { Analytics } from '@vercel/analytics/react'
 import './globals.css'
-import type { Metadata } from 'next'
+import type { Metadata, Viewport } from 'next'
 import { Inter } from 'next/font/google'
 import ReactQueryProvider from '@/components/ReactQueryProvider'
 import ThemeProvider from '@/components/themeProvider'
@@ -20,7 +20,6 @@ export const metadata: Metadata = {
   },
   description: APP_DESCRIPTION,
   manifest: '/manifest.json',
-  themeColor: '#8A47CD',
   appleWebApp: {
     capable: true,
     statusBarStyle: 'default',
@@ -30,6 +29,10 @@ export const metadata: Metadata = {
   formatDetection: {
     telephone: false,
   },
+}
+
+export const viewport: Viewport = {
+  themeColor: '#8A47CD',
 }
 
 export default function RootLayout({
