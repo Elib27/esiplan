@@ -19,7 +19,7 @@ export default function Settings() {
     !settingsStore.selectedEdts.includes('')
 
   return (
-    <main className='flex flex-col items-center'>
+    <main className='flex flex-col items-center pb-8'>
       <div className='w-10/12 max-w-xl'>
         <h1 className='pb-8 pt-4 text-4xl font-medium transition-colors dark:text-white'>
           Paramètres
@@ -56,7 +56,7 @@ export default function Settings() {
           )}
         </div>
         <h2 className='pb-4 text-xl font-bold transition-colors dark:text-white'>
-          Colors
+          Couleurs
         </h2>
         <ColorPickers />
       </div>
