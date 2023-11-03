@@ -12,7 +12,7 @@ export default function Settings() {
 
   const { data: groups } = useGroups()
 
-  if (!settingsStore || !groups) return null
+  if (!settingsStore) return null
 
   const isAddButtonVisible =
     settingsStore.selectedEdts.length < 3 &&
@@ -38,14 +38,15 @@ export default function Settings() {
           EDTs
         </h2>
         <div className='max-w flex w-full flex-col items-center gap-4 pb-10'>
-          {settingsStore.selectedEdts.map((group, i) => (
-            <SelectedEdt
-              number={i + 1}
-              group={group}
-              groups={groups}
-              key={group}
-            />
-          ))}
+          {groups &&
+            settingsStore.selectedEdts.map((group, i) => (
+              <SelectedEdt
+                number={i + 1}
+                group={group}
+                groups={groups}
+                key={group}
+              />
+            ))}
           {isAddButtonVisible && (
             <button
               className='flex-grow-0 rounded-full bg-light-purple p-2 active:scale-95'
