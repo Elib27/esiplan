@@ -5,7 +5,7 @@ const EDTS_URL = 'https://edt.esisariens.org'
 
 export async function GET() {
   try {
-    const response = await fetch(EDTS_URL, { next: { revalidate: 3600 * 12 } })
+    const response = await fetch(EDTS_URL, { next: { revalidate: 3600 } })
     const html = await response.text()
     const root = parse(html)
     const groupsData = root.querySelectorAll('table ul.dropdown-menu a')

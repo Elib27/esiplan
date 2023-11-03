@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import useSchedule from '@/hooks/useSchedule'
 import sortLessonsByDate from '@/lib/sortLessonsByDate'
 import LessonCard from '../lessonCard'
@@ -10,7 +11,23 @@ export default function DaySchedule({
   scheduleDate: Date
   currentEdt: string | undefined
 }) {
-  const { data: schedule, isLoading } = useSchedule(currentEdt)
+  const { data: schedule, isLoading, refetch } = useSchedule(currentEdt)
+
+  // Refetch schedule when the page is voluntary reloaded
+  useEffect(() => {
+    if (!refetch) return
+    const observer = new PerformanceObserver((list) => {
+      list.getEntries().forEach((entry) => {
+        if (
+          entry instanceof PerformanceNavigationTiming &&
+          entry.type === 'reload'
+        ) {
+          refetch()
+        }
+      })
+    })
+    observer.observe({ type: 'navigation', buffered: true })
+  }, [refetch])
 
   const todaySchedule: Schedule = schedule
     ?.filter(
@@ -68,7 +85,7 @@ export default function DaySchedule({
 
   return (
     <>
-      {todaySchedule.map((lesson: Lesson) => (
+      {todaySchedule.map((lesson) => (
         <LessonCard
           subject={lesson.subject}
           type={lesson.type}
