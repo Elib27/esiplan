@@ -33,7 +33,6 @@ export default function LessonCard({
     TD: 'bg-[--color-td]',
     TP: 'bg-[--color-tp]',
     DS: 'bg-[--color-ds]',
-    EX: 'bg-[--color-ex]',
     AU: 'bg-[--color-au]',
   }
 
