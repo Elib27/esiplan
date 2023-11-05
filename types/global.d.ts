@@ -1,4 +1,4 @@
-import { lessonTypesDefaultColors } from '@/constant'
+import { lessonTypesDefaultColors } from '@/constants'
 export {}
 
 declare global {

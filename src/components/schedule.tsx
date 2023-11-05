@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react'
 import useStore from '@/hooks/useStore'
 import { useSettingsStore } from '@/store/useSettingsStore'
+import addDaysToDate from '@/lib/addDaysToDate'
 import TopMenu from './settings/topMenu'
 import DateNavigation from './dateNavigation'
 import DayScheduleSwipeLayout from './daySchedule/dayScheduleSwipeLayout'
@@ -12,6 +13,21 @@ export default function Schedule() {
   const settingsStore = useStore(useSettingsStore, (state) => state)
 
   const [scheduleDate, setScheduleDate] = useState(new Date())
+
+  useEffect(() => {
+    if (!settingsStore?.showNextDayScheduleHour) return
+    console.log('tomo: ', settingsStore.showNextDayScheduleHour)
+    const todayDate = new Date()
+    const getInitialDate = () => {
+      if (todayDate.getHours() >= settingsStore.showNextDayScheduleHour) {
+        const tomorrowDate = addDaysToDate(new Date(), 1)
+        console.log('oui')
+        return tomorrowDate
+      }
+      return todayDate
+    }
+    setScheduleDate(getInitialDate())
+  }, [settingsStore?.showNextDayScheduleHour])
 
   // Update colors when settings change
   useEffect(() => {
@@ -33,6 +49,16 @@ export default function Schedule() {
     day: 'numeric',
   })
 
+  const todayDate = new Date()
+
+  const scheduleDateTitle = `${fullScheduleDate} ${
+    settingsStore?.showNextDayScheduleHour &&
+    todayDate.getHours() >= settingsStore?.showNextDayScheduleHour &&
+    scheduleDate.getDate() === todayDate.getDate() + 1
+      ? '(demain)'
+      : ''
+  }`
+
   if (!settingsStore) return null
 
   return (
@@ -43,7 +69,7 @@ export default function Schedule() {
           setScheduleDate={setScheduleDate}
         />
         <h3 className='py-4 text-center transition-colors dark:text-white'>
-          {fullScheduleDate}
+          {scheduleDateTitle}
         </h3>
         <DayScheduleSwipeLayout setScheduleDate={setScheduleDate}>
           <DaySchedule
