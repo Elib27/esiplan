@@ -1,12 +1,16 @@
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
-import { lessonTypesDefaultColors } from '@/constant'
+import {
+  lessonTypesDefaultColors,
+  showTomorrowDefaultScheduleHour,
+} from '@/constants'
 
 type State = {
   darkMode: boolean
   selectedEdts: string[]
   currentEdt: string | undefined
   lessonTypesColors: typeof lessonTypesDefaultColors
+  showNextDayScheduleHour: number
 }
 
 type Action = {
@@ -17,6 +21,7 @@ type Action = {
   removeSelectedEdt: (edt: string) => void
   modifyLessonTypeColor: (lessonType: LessonType, color: string) => void
   resetLessonTypeColor: () => void
+  setShowNextDayScheduleHour: (hour: number) => void
 }
 
 export const useSettingsStore = create(
@@ -26,6 +31,7 @@ export const useSettingsStore = create(
       selectedEdts: [],
       currentEdt: undefined,
       lessonTypesColors: lessonTypesDefaultColors,
+      showNextDayScheduleHour: showTomorrowDefaultScheduleHour,
       toggleDarkMode: () =>
         set((state) => ({
           darkMode: !state.darkMode,
@@ -63,6 +69,8 @@ export const useSettingsStore = create(
         }
         set(() => ({ lessonTypesColors: lessonTypesDefaultColors }))
       },
+      setShowNextDayScheduleHour: (hour: number) =>
+        set(() => ({ showNextDayScheduleHour: hour })),
     }),
     {
       name: 'esiplan-settings-storage',

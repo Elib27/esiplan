@@ -6,3 +6,5 @@ export const lessonTypesDefaultColors = {
   EX: '#F07676',
   AU: '#E27EF2',
 }
+
+export const showTomorrowDefaultScheduleHour = 20

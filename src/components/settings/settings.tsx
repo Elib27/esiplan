@@ -7,12 +7,18 @@ import Option from '@/components/settings/option'
 import SelectedEdt from '@/components/settings/selectedEdt'
 import AddIcon from '@/assets/add.svg'
 
+const convertHourToInputTime = (hour: number) =>
+  hour.toString().padStart(2, '0') + ':00'
+
+const convertInputTimeToHour = (inputTime: string) =>
+  parseInt(inputTime.split(':')[0])
+
 export default function Settings() {
   const settingsStore = useStore(useSettingsStore, (state) => state)
 
   const { data: groups } = useGroups()
 
-  if (!settingsStore || !groups) return null
+  if (!settingsStore) return null
 
   const isAddButtonVisible =
     settingsStore.selectedEdts.length < 3 &&
@@ -33,19 +39,42 @@ export default function Settings() {
             isActivated={settingsStore.darkMode}
             onClick={() => settingsStore.toggleDarkMode()}
           />
+          <div className='flex justify-between'>
+            <label
+              htmlFor='showTomorrowTime'
+              className='transition-colors dark:text-white'
+            >
+              Afficher l&apos;EDT du lendemain
+            </label>
+            <input
+              type='time'
+              name='showTomorrowTime'
+              id='showTomorrowTime'
+              step='3600'
+              value={convertHourToInputTime(
+                settingsStore.showNextDayScheduleHour
+              )}
+              onChange={(e) =>
+                settingsStore.setShowNextDayScheduleHour(
+                  convertInputTimeToHour(e.target.value)
+                )
+              }
+            />
+          </div>
         </div>
         <h2 className='pb-4 text-xl font-bold transition-colors dark:text-white'>
           EDTs
         </h2>
         <div className='max-w flex w-full flex-col items-center gap-4 pb-10'>
-          {settingsStore.selectedEdts.map((group, i) => (
-            <SelectedEdt
-              number={i + 1}
-              group={group}
-              groups={groups}
-              key={group}
-            />
-          ))}
+          {groups &&
+            settingsStore.selectedEdts.map((group, i) => (
+              <SelectedEdt
+                number={i + 1}
+                group={group}
+                groups={groups}
+                key={group}
+              />
+            ))}
           {isAddButtonVisible && (
             <button
               className='flex-grow-0 rounded-full bg-light-purple p-2 active:scale-95'
