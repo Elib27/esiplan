@@ -1,13 +1,13 @@
 # Emploi du temps ESISAR
 
-![esiplan](esiplan.png)
+Consulter l'emploi du temps : [Esiplan](https://esiplan.vercel.app/)
+
+![Esiplan](esiplan.png)
 
 ## Application web progressive (PWA)
 
 _Parce-qu'on est plus en 2008._
 
-Sur le site : [esiplan](https://esiplan.vercel.app/)
+Vous pouvez consulter le site [Esiplan](https://esiplan.vercel.app/) puis/ou l'installer sur un PC ou sur un mobile via Chrome.
 
-Vous pouvez l'installer sur un PC ou un téléphone comme une appli via chrome.
-
-![esiplan android chrome](esiplan_chrome_android.jpg)
+<img src="esiplan_chrome_android.jpg" width="300px">
