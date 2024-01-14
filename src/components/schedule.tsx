@@ -16,12 +16,10 @@ export default function Schedule() {
 
   useEffect(() => {
     if (!settingsStore?.showNextDayScheduleHour) return
-    console.log('tomo: ', settingsStore.showNextDayScheduleHour)
     const todayDate = new Date()
     const getInitialDate = () => {
       if (todayDate.getHours() >= settingsStore.showNextDayScheduleHour) {
         const tomorrowDate = addDaysToDate(new Date(), 1)
-        console.log('oui')
         return tomorrowDate
       }
       return todayDate

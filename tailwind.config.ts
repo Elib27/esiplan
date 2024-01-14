@@ -18,6 +18,7 @@ const config: Config = {
       'dark-gray': '#49454F',
       'light-gray': '#B7B3BE',
       'very-light-gray': '#E7E7E7',
+      error: '#EF4444',
     },
     extend: {
       boxShadow: {

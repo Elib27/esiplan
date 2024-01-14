@@ -16,7 +16,7 @@ const convertInputTimeToHour = (inputTime: string) =>
 export default function Settings() {
   const settingsStore = useStore(useSettingsStore, (state) => state)
 
-  const { data: groups } = useGroups()
+  const { data: groups, isError: isGroupsError } = useGroups()
 
   if (!settingsStore) return null
 
@@ -65,25 +65,31 @@ export default function Settings() {
         <h2 className='pb-4 text-xl font-bold transition-colors dark:text-white'>
           EDTs
         </h2>
-        <div className='max-w flex w-full flex-col items-center gap-4 pb-10'>
-          {groups &&
-            settingsStore.selectedEdts.map((group, i) => (
-              <SelectedEdt
-                number={i + 1}
-                group={group}
-                groups={groups}
-                key={group}
-              />
-            ))}
-          {isAddButtonVisible && (
-            <button
-              className='flex-grow-0 rounded-full bg-light-purple p-2 active:scale-95'
-              onClick={() => settingsStore.addSelectedEdt('')}
-            >
-              <AddIcon />
-            </button>
-          )}
-        </div>
+        {isGroupsError ? (
+          <p className='text-error pb-10 font-medium'>
+            ⚠ Erreur lors de la récupération des groupes
+          </p>
+        ) : (
+          <div className='max-w flex w-full flex-col items-center gap-4 pb-10'>
+            {groups &&
+              settingsStore.selectedEdts.map((group, i) => (
+                <SelectedEdt
+                  number={i + 1}
+                  group={group}
+                  groups={groups}
+                  key={group}
+                />
+              ))}
+            {isAddButtonVisible && (
+              <button
+                className='flex-grow-0 rounded-full bg-light-purple p-2 active:scale-95'
+                onClick={() => settingsStore.addSelectedEdt('')}
+              >
+                <AddIcon />
+              </button>
+            )}
+          </div>
+        )}
         <h2 className='pb-4 text-xl font-bold transition-colors dark:text-white'>
           Couleurs
         </h2>

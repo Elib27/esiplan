@@ -11,7 +11,12 @@ export default function DaySchedule({
   scheduleDate: Date
   currentEdt: string | undefined
 }) {
-  const { data: schedule, isLoading, refetch } = useSchedule(currentEdt)
+  const {
+    data: schedule,
+    isLoading,
+    isError,
+    refetch,
+  } = useSchedule(currentEdt)
 
   // Refetch schedule when the page is voluntary reloaded
   useEffect(() => {
@@ -65,11 +70,12 @@ export default function DaySchedule({
     )
   }
 
-  if (!todaySchedule) {
+  if (isError || !todaySchedule) {
     return (
       <div className='flex h-full select-none flex-col items-center justify-center transition-colors dark:text-white'>
-        <span className='text-center'>
-          Une erreur s&apos;est produite lors de la récupération de l&apos;EDT
+        <span className='text-error text-center font-medium'>
+          ⚠ Une erreur s&apos;est produite lors de la récupération de
+          l&apos;EDT
         </span>
       </div>
     )
