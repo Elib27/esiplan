@@ -8,31 +8,46 @@ export default function DayScheduleSwipeLayout({
   setScheduleDate: Dispatch<SetStateAction<Date>>
   children: React.ReactNode
 }) {
-  const touchstartX = useRef<number | null>(null)
+  const touchStartX = useRef<number | null>(null)
   const touchEndX = useRef<number | null>(null)
+  const touchStartY = useRef<number | null>(null)
+  const touchEndY = useRef<number | null>(null)
 
-  const MIN_SWIPE_DISTANCE = 50
+  const MIN_X_SWIPE_DISTANCE = 20
+  const MAX_Y_SWIPE_DISTANCE = 40
 
   const navigateToPrevDay = () => setScheduleDate((d) => addDaysToDate(d, -1))
   const navigateToNextDay = () => setScheduleDate((d) => addDaysToDate(d, 1))
 
   function checkDirection() {
-    if (!touchstartX.current || !touchEndX.current) return
+    if (
+      !touchStartX.current ||
+      !touchEndX.current ||
+      !touchStartY.current ||
+      !touchEndY.current
+    )
+      return
 
-    const swipeDistance = touchEndX.current - touchstartX.current
-    if (swipeDistance > MIN_SWIPE_DISTANCE) {
+    const swipeDistanceX = touchEndX.current - touchStartX.current
+    const swipeDistanceY = touchEndY.current - touchStartY.current
+
+    if (Math.abs(swipeDistanceY) > MAX_Y_SWIPE_DISTANCE) return
+
+    if (swipeDistanceX > MIN_X_SWIPE_DISTANCE) {
       navigateToPrevDay()
-    } else if (swipeDistance < -MIN_SWIPE_DISTANCE) {
+    } else if (swipeDistanceX < -MIN_X_SWIPE_DISTANCE) {
       navigateToNextDay()
     }
   }
 
   function handleTouchStart(e: React.TouchEvent<HTMLDivElement>) {
-    touchstartX.current = e.changedTouches[0].screenX
+    touchStartX.current = e.changedTouches[0].screenX
+    touchStartY.current = e.changedTouches[0].screenY
   }
 
   function handleTouchEnd(e: React.TouchEvent<HTMLDivElement>) {
     touchEndX.current = e.changedTouches[0].screenX
+    touchEndY.current = e.changedTouches[0].screenY
     checkDirection()
   }
 

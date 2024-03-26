@@ -1,7 +1,8 @@
+import { lessonTypesDefaultColors } from '@/constants'
 export {}
 
 declare global {
-  type LessonType = 'CM' | 'TD' | 'TP' | 'DS' | 'EX' | 'AU'
+  type LessonType = keyof typeof lessonTypesDefaultColors
 
   type Lesson = {
     subject: string

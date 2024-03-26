@@ -28,13 +28,12 @@ export default function LessonCard({
   startTime,
   endTime,
 }: LessonCardProps) {
-  const lessonTypeBgColors: { readonly [index: string]: string } = {
-    cm: 'bg-color-cm',
-    td: 'bg-color-td',
-    tp: 'bg-color-tp',
-    ds: 'bg-color-ds',
-    ex: 'bg-color-ex',
-    au: 'bg-color-au',
+  const typeColors: { readonly [index: string]: string } = {
+    CM: 'bg-[--color-cm]',
+    TD: 'bg-[--color-td]',
+    TP: 'bg-[--color-tp]',
+    DS: 'bg-[--color-ds]',
+    AU: 'bg-[--color-au]',
   }
 
   const cardSizes: { readonly [index: number]: string } = {
@@ -51,9 +50,11 @@ export default function LessonCard({
         cardSizes[getCardHeightWithDuration(lessonDuration)]
       } flex w-[90vw] max-w-sm flex-shrink-0 select-none items-center gap-2 overflow-hidden rounded-2xl bg-main-purple shadow-card`}
     >
-      <div className='flex h-full flex-col justify-between py-3 pl-3'>
-        <span className='text-sm text-white'>{formatTime(startTime)}</span>
-        <span className='text-sm text-white'>{formatTime(endTime)}</span>
+      <div className='flex h-full w-14 flex-col justify-between py-3 pl-3'>
+        <span className='w-fit text-sm text-white'>
+          {formatTime(startTime)}
+        </span>
+        <span className='w-fit text-sm text-white'>{formatTime(endTime)}</span>
       </div>
       <div className='flex-1 overflow-hidden'>
         <h2 className='overflow-hidden text-ellipsis text-center font-bold text-white'>
@@ -64,11 +65,11 @@ export default function LessonCard({
         </span>
       </div>
       <div
-        className={`${
-          lessonTypeBgColors[type.toLocaleLowerCase()]
-        } flex h-full items-center justify-center`}
+        className={`flex h-full w-16 items-center justify-center ${
+          typeColors[type.toUpperCase()]
+        }`}
       >
-        <span className='px-4 font-bold'>{type.toUpperCase()}</span>
+        <span className='font-bold'>{type.toUpperCase()}</span>
       </div>
     </div>
   )

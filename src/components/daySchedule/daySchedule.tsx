@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import useSchedule from '@/hooks/useSchedule'
 import sortLessonsByDate from '@/lib/sortLessonsByDate'
 import LessonCard from '../lessonCard'
@@ -10,7 +11,28 @@ export default function DaySchedule({
   scheduleDate: Date
   currentEdt: string | undefined
 }) {
-  const { data: schedule, isLoading } = useSchedule(currentEdt)
+  const {
+    data: schedule,
+    isLoading,
+    isError,
+    refetch,
+  } = useSchedule(currentEdt)
+
+  // Refetch schedule when the page is voluntary reloaded
+  useEffect(() => {
+    if (!refetch) return
+    const observer = new PerformanceObserver((list) => {
+      list.getEntries().forEach((entry) => {
+        if (
+          entry instanceof PerformanceNavigationTiming &&
+          entry.type === 'reload'
+        ) {
+          refetch()
+        }
+      })
+    })
+    observer.observe({ type: 'navigation', buffered: true })
+  }, [refetch])
 
   const todaySchedule: Schedule = schedule
     ?.filter(
@@ -48,11 +70,12 @@ export default function DaySchedule({
     )
   }
 
-  if (!todaySchedule) {
+  if (isError || !todaySchedule) {
     return (
       <div className='flex h-full select-none flex-col items-center justify-center transition-colors dark:text-white'>
-        <span className='text-center'>
-          Une erreur s&apos;est produite lors de la récupération de l&apos;EDT
+        <span className='text-error text-center font-medium'>
+          ⚠ Une erreur s&apos;est produite lors de la récupération de
+          l&apos;EDT
         </span>
       </div>
     )
@@ -68,7 +91,7 @@ export default function DaySchedule({
 
   return (
     <>
-      {todaySchedule.map((lesson: Lesson) => (
+      {todaySchedule.map((lesson) => (
         <LessonCard
           subject={lesson.subject}
           type={lesson.type}

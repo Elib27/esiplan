@@ -46,7 +46,7 @@ export default function SelectedEdt({
   const containerRef = useClickOutside(() => setIsDropDownOpen(false))
 
   return (
-    <div ref={containerRef as RefObject<HTMLDivElement>}>
+    <div className='w-full' ref={containerRef as RefObject<HTMLDivElement>}>
       <div
         className={`${
           isDropDownOpen ? 'rounded-t-md' : 'rounded-md'
@@ -68,7 +68,7 @@ export default function SelectedEdt({
         <ul
           className={`${
             isDropDownOpen ? 'absolute' : 'hidden'
-          } dark:bg-gray-purple left-0 top-0 flex max-h-80 w-full flex-col gap-1 overflow-y-scroll rounded-b-md bg-very-light-gray p-2 transition-colors dark:text-white`}
+          } left-0 top-0 flex max-h-80 w-full flex-col gap-1 overflow-y-scroll rounded-b-md bg-very-light-gray p-2 transition-colors dark:bg-gray-purple dark:text-white`}
         >
           {unselectedGroups.map((g) => (
             <li
